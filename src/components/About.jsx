@@ -26,33 +26,34 @@ Tag.displayName = "Tag";
 
 const SOCIAL_LINKS = [
   {
-    href: "https://github.com/shashank2401",
+    href: "https://github.com/dammmup",
     icon: <Github className="w-5 h-5" />,
     title: "GitHub",
   },
   {
-    href: "https://www.linkedin.com/in/shashankraj2401/",
+    href: "https://www.linkedin.com/in/damir-biyankho-558287294/",
     icon: <Linkedin className="w-5 h-5" />,
     title: "LinkedIn",
   },
   {
-    href: "mailto:shashankraj0124@gmail.com",
+    href: "mailto:damir.-@mail.ru",
     icon: <Mail className="w-5 h-5" />,
     title: "Email",
   },
 ];
 
 const TAGS = [
-  "Competitive Programming",
-  "Data Structures",
-  "Algorithms",
-  "C++",
-  "Problem Solving",
+  "TypeScript",
+  "ReactJS",
+  "Node.js",
+  "MongoDB",
+  "Docker",
+  "REST API",
   "Web Development",
 ];
 
-const RESUME_URL =
-  "https://drive.google.com/file/d/1FIq3CNO73-M9GXjIhZAYo49gQGxgmudO/view?usp=sharing";
+// TODO: Replace with actual resume PDF URL when available
+const RESUME_URL = "#";
 
 export default memo(function About() {
   const socialLinksElements = useMemo(
@@ -89,11 +90,11 @@ export default memo(function About() {
           transition={{ duration: 0.6 }}
           className="flex-shrink-0 w-40 h-40 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white dark:border-neutral-900 shadow-md bg-neutral-200 dark:bg-neutral-800"
           tabIndex={0}
-          aria-label="Profile photo of Shashank Raj"
+          aria-label="Profile photo of Damir Biyankho"
         >
           <img
             src="/assets/MyPhotograph.png"
-            alt="Shashank Raj"
+            alt="Damir Biyankho"
             loading="lazy"
             decoding="async"
             className="object-cover w-full h-full"
@@ -118,13 +119,13 @@ export default memo(function About() {
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-3 text-foreground text-center md:text-left">
             Hi, I'm{" "}
             <span className="bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-600 dark:from-white dark:via-neutral-300 dark:to-neutral-400 bg-clip-text text-transparent">
-              Shashank Raj
+              Damir Biyankho
             </span>
           </h1>
 
           <div className="flex items-center justify-center md:justify-start gap-2 text-muted-foreground text-sm mb-2">
             <GraduationCap className="w-4 h-4" />
-            <span>IIT (BHU) Varanasi</span>
+            <span>Eurasian Technological University</span>
           </div>
 
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mb-4 text-center md:text-left">

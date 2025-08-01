@@ -124,19 +124,19 @@ function ContactComponent() {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4">
-                Whether you want to discuss a project, ask a question, or just say hello, I’d love to hear from you. Fill out the form below or email me directly. Let’s connect!
+                Whether you want to discuss a project, ask a question, or just say hello, I’d love to hear from you. You can also reach me by phone at +7 (747) 831-33-98 or +7 (708) 935-89-75. Fill out the form below or email me directly. Let’s connect!
             </p>
         </motion.div>
 
         <motion.div variants={itemVariants}>
           <a
-            href="mailto:shashankraj0124@gmail.com"
+            href="mailto:damir.-@mail.ru"
             className="flex justify-center items-center gap-2 text-primary text-lg font-medium hover:underline transition-colors duration-200"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Mail className="w-5 h-5" />
-            shashankraj0124@gmail.com
+            damir.-@mail.ru
           </a>
         </motion.div>
 

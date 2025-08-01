@@ -75,32 +75,40 @@ const EducationCard = memo(({ education }) => {
 EducationCard.displayName = "EducationCard";
 
 
-// --- Static Data (No changes needed) ---
+// --- Данные об образовании ---
 const ACADEMICS_DATA = [
   {
-    logo: "/assets/logos/iit_bhu.png",
-    alt: "IIT BHU Logo",
-    title: "Indian Institute of Technology (BHU) Varanasi",
-    link: "https://iitbhu.ac.in/dept/civ",
-    program: "B.Tech in Civil Engineering",
-    year: "2023 – 2027",
-    scoreLabel: "CGPA",
-    score: "8.14 / 10",
+    logo: "/assets/logos/tec.png", // обновить путь при необходимости
+    alt: "TEC Logo",
+    title: "ISTEP Academy",
+    link: "#",
+    program: "Competitive Programming",
+    year: "2024",
+    scoreLabel: "Diploma",
+    score: "courses",
   },
   {
-    logo: "/assets/logos/sps_rohini.jpg",
-    alt: "SPS Rohini Logo",
-    title: "Sachdeva Public School, Rohini",
-    link: "https://www.spsrohini.com/",
-    program: "CBSE (Class XII - 2022, Class X - 2020)",
-    year: "2022",
-    scoreLabel: "Percentage",
-    score: "Class XII - 92.80%, Class X - 97.00%",
+    logo: "/assets/logos/etu.png", // обновить путь при необходимости
+    alt: "ETU Logo",
+    title: "Eurasian Technological University",
+    link: "https://etu.kz/",
+    program: "Information Systems",
+    year: "2023",
+    scoreLabel: "Diploma",
+    score: "Average Professional",
   },
+  {
+    logo: "/assets/logos/tec.png", // обновить путь при необходимости
+    alt: "TEC Logo",
+    title: "Technical Economic College",
+    link: "#",
+    program: "Technology of Production of Products",
+    year: "2021",
+    scoreLabel: "Diploma",
+    score: "Average Professional",
+  }
 ];
-
-
-// --- Main Academics Component ---
+ 
 const AcademicsComponent = memo(function Academics() {
   const educationCards = useMemo(
     () =>

@@ -86,12 +86,27 @@ SkillSection.displayName = "SkillSection";
 
 // --- Static Data (No changes needed) ---
 const SKILLS_SECTIONS = [
-    { icon: <Code className="w-6 h-6" />, title: "Programming Languages", tags: ["C", "C++", "Java", "JavaScript", "Python", "HTML", "CSS"] },
-    { icon: <Layers className="w-6 h-6" />, title: "Frameworks & Libraries", tags: ["React", "Tailwind CSS", "SFML", "NumPy", "Pandas"] },
-    { icon: <Terminal className="w-6 h-6" />, title: "Tools & Platforms", tags: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Sublime Text"] },
-    { icon: <Sparkles className="w-6 h-6" />, title: "Interests", tags: ["Competitive Programming", "DSA", "Machine Learning", "Web Development"] },
+  {
+    icon: <Code className="w-6 h-6" />,
+    title: "Languages",
+    tags: ["JavaScript", "TypeScript", "C++", "C#"],
+  },
+  {
+    icon: <Layers className="w-6 h-6" />,
+    title: "Frameworks and Libraries",
+    tags: ["React", "Next.js", "Node.js", "Express", "Bootstrap", "Material-UI", "Ant Design"],
+  },
+  {
+    icon: <Terminal className="w-6 h-6" />,
+    title: "Tools and Platforms",
+    tags: ["Git", "GitHub", "Docker", "Redis", "MongoDB","Jira","Postman","Confluence","Bitbucket","Vercel","Railway"],
+  },
+  {
+    icon: <Sparkles className="w-6 h-6" />,
+    title: "Interests",
+    tags: ["Web Development", "Microservices", "Clean Code", "Open Source"],
+  },
 ];
-
 
 // --- Main Skills Component ---
 const SkillsComponent = memo(function Skills() {
