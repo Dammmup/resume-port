@@ -80,19 +80,30 @@ ProjectCard.displayName = "ProjectCard";
 function ProjectsComponent() {
   const projectsData = useMemo(
     () => [
+
+
       {
-        title: "Search_Content",
-        desc: "Web application for full-text search and content analysis by keywords.",
-        tags: ["Next.js", "JavaScript", "MongoDB", "Tailwind","Ant Design"],
+        title: "Detsad — Vertical ERP System",
+        desc: "Full-stack (Node.js/Express + React/MUI) for comprehensive kindergarten management. Covers all business processes: children, attendance, catering, medical records, staff, payroll, document management, and finance. Features Firebase push notifications, Telegram bot, AI Assistant (Qwen), and automated cron jobs for reporting, payroll calculation, and invoicing. Deployed on Vercel.",
+        tags: ["Node.js", "Express", "React", "MUI", "Firebase", "Telegram Bot", "AI (Qwen)", "Cron", "Vercel"],
         links: [
-          { type: "code", href: "https://github.com/dammmup/Search_Content" },
-          { type: "demo", href: "https://search-content.vercel.app/" },
+          { type: "code", href: "https://github.com/dammmup" },
         ],
       },
       {
-        title: "Room Service Menu",
-        desc: "System for electronic menu for hotel room-service, divided into frontend and backend.",
-        tags: ["React", "Node.js", "Express", "MongoDB","Ant Design"],
+        title: "Uyghur Connect — SaaS Platform",
+        desc: "Full-stack (Express + React) course management system featuring dynamic lessons (text, video, code, images), community forums, and events. Implements student/teacher/admin role-based access control, email verification, content editor integration (TinyMCE/Quill), and 4-language internationalization. Includes Drag & Drop for lesson sequencing.",
+        tags: ["Express", "React", "SaaS", "Quill", "i18n", "Drag & Drop", "JWT"],
+        links: [
+          { type: "code", href: "https://github.com/dammmup/ur-front" },
+          { type: "code", href: "https://github.com/dammmup/ur-ba" },
+          { type: "demo", href: "https://uyghurlearn.vercel.app/" },
+        ],
+      },
+      {
+        title: "Garden Park Inn — Room Service",
+        desc: "Full-stack (Express + React + Ant Design) digital menu and room service system. Features automatic UI language and currency switching (9 languages, 7 currencies). Includes an admin panel where new items are automatically translated into 8 languages via Google Translate API. Real-time cart calculation with a 10% service charge.",
+        tags: ["Express", "React", "Ant Design", "Google Translate", "Currency API"],
         links: [
           { type: "code", href: "https://github.com/dammmup/GFrontend" },
           { type: "code", href: "https://github.com/dammmup/GBackend" },
@@ -100,13 +111,20 @@ function ProjectsComponent() {
         ],
       },
       {
-        title: "UyghurLearn SaaS Platform",
-        desc: "SaaS platform for learning the Uighur language with courses, tests, and payments.",
-        tags: ["Typescript","React","Ant Design","Node.js","MongoDB","JWT","EmailVerification","LinkRedirect","AccessControl","Material-UI", "Request per second limit"],
+        title: "Reality Constructor (Universe)",
+        desc: "3D interactive experience built with React Three Fiber + Three.js, guiding users through 5 scales of existence — from the Big Bang to brain neurons. Each scene features clickable 'reality factors' with reverse capabilities (War ↔ Peace, Gravity ↔ Decay, etc.), dynamically altering visual behavior. Powered by GSAP animations, Zustand, and Tailwind CSS.",
+        tags: ["Three.js", "React Three Fiber", "GSAP", "Zustand", "Tailwind CSS"],
         links: [
-          { type: "code", href: "https://github.com/dammmup/ur-front" },
-          { type: "code", href: "https://github.com/dammmup/ur-ba" },
-          { type: "demo", href: "https://uyghurlearn.vercel.app/" },
+          { type: "code", href: "https://github.com/dammmup" },
+        ],
+      },
+      {
+        title: "SearchX — Content Aggregator",
+        desc: "React + Redux Toolkit application integrating 8 public APIs (movies, music, games, images, crypto, jokes, etc.) into a unified glassmorphism interface. Implements user authentication and persistent favorites storage using Supabase.",
+        tags: ["React", "Redux Toolkit", "Supabase", "Glassmorphism", "Public APIs"],
+        links: [
+          { type: "code", href: "https://github.com/dammmup/Search_Content" },
+          { type: "demo", href: "https://search-content.vercel.app/" },
         ],
       },
     ],
@@ -125,13 +143,13 @@ function ProjectsComponent() {
       >
         {/* Item 1: The header text block */}
         <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 flex items-center gap-4 text-foreground">
-                <FolderKanban className="w-8 h-8 sm:w-11 sm:h-11 text-primary drop-shadow-sm" />
-                Projects
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-center mb-10">
-                Here are some of the projects I've worked on, ranging from algorithm visualizers and utilities to frontend tools and machine learning models. Each project reflects my passion for clean design, efficient problem-solving, and practical implementation.
-            </p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 flex items-center gap-4 text-foreground">
+            <FolderKanban className="w-8 h-8 sm:w-11 sm:h-11 text-primary drop-shadow-sm" />
+            Projects
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-center mb-10">
+            Here are some of the projects I've worked on, ranging from algorithm visualizers and utilities to frontend tools and machine learning models. Each project reflects my passion for clean design, efficient problem-solving, and practical implementation.
+          </p>
         </motion.div>
 
         {/* Item 2: The entire project card grid animates in as one block... */}

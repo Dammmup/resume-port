@@ -94,17 +94,17 @@ const SKILLS_SECTIONS = [
   {
     icon: <Layers className="w-6 h-6" />,
     title: "Frameworks and Libraries",
-    tags: ["React", "Next.js", "Node.js", "Express", "Bootstrap", "Material-UI", "Ant Design"],
+    tags: ["React", "Next.js", "Node.js", "Express", "Bootstrap", "Material-UI", "Ant Design", "Firebase", "Sentry"],
   },
   {
     icon: <Terminal className="w-6 h-6" />,
     title: "Tools and Platforms",
-    tags: ["Git", "GitHub", "Docker", "Redis", "MongoDB","Jira","Postman","Confluence","Bitbucket","Vercel","Railway"],
+    tags: ["Git", "GitHub", "Docker", "Redis", "MongoDB", "Jira", "Postman", "Confluence", "Bitbucket", "Vercel", "Railway"],
   },
   {
     icon: <Sparkles className="w-6 h-6" />,
     title: "Interests",
-    tags: ["Web Development", "Microservices", "Clean Code", "Open Source"],
+    tags: ["Web Development", "Microservices", "Clean Code", "Open Source", "Vibecoding"],
   },
 ];
 
@@ -126,17 +126,17 @@ const SkillsComponent = memo(function Skills() {
       >
         {/* Item 1: The header text block */}
         <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 flex items-center gap-4 text-foreground">
-                <Settings2 className="w-8 h-8 sm:w-11 sm:h-11 text-primary drop-shadow-sm" />
-                Skills & Interests
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-                Here you'll find a snapshot of my technical toolkit and passions. I
-                believe in learning by doing, and my skills reflect a blend of academic
-                depth and hands-on project work.
-            </p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 flex items-center gap-4 text-foreground">
+            <Settings2 className="w-8 h-8 sm:w-11 sm:h-11 text-primary drop-shadow-sm" />
+            Skills & Interests
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
+            Here you'll find a snapshot of my technical toolkit and passions. I
+            believe in learning by doing, and my skills reflect a blend of academic
+            depth and hands-on project work.
+          </p>
         </motion.div>
-        
+
         {/* Item 2: The entire skill card grid animates in as one block... */}
         <motion.div
           variants={containerVariants} // It's also a container for its own children
