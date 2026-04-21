@@ -6,6 +6,10 @@ import { translations } from "../translations";
 
 const aldamiram = ['/aldamiram screen.png', '/aldamiram screen1.png', '/aldamiram screen2.png']
 const yughur = ['/yug.png', '/yug1.png', '/yug2.png']
+const garden = ['/garr.png', '/garr1.png', '/garr2.png']
+const mobile = ['/mob.png', '/mob1.png', '/mob2.png']
+const universe = ['/uni.png', '/uni1.png', '/uni2.png']
+const search = ['/search.png', '/search1.png']
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -276,7 +280,7 @@ function ProjectsComponent() {
           integrations: ["Geofencing API", "Background GPS Tracking", "Push Notifications", "Firebase Auth"],
         },
         highlights: t.projects.detsadMobile.highlights,
-        previews: [],
+        previews: mobile,
         links: [
           { type: "code", href: "https://github.com/Dammmup/detsad_m" },
         ],
@@ -295,7 +299,7 @@ function ProjectsComponent() {
         links: [
           { type: "code", href: "https://github.com/Dammmup/ur-front" },
           { type: "code", href: "https://github.com/Dammmup/ur-ba" },
-          { type: "demo", href: "https://uyghurlearn.vercel.app/" },
+          { type: "demo", href: "https://ur-front.vercel.app/" },
         ],
       },
       {
@@ -308,11 +312,11 @@ function ProjectsComponent() {
           integrations: ["9-language auto-translation", "Currency conversion (floatrates API)", "Admin Content Management"],
         },
         highlights: t.projects.gardenParkInn.highlights,
-        previews: [],
+        previews: garden,
         links: [
           { type: "code", href: "https://github.com/Dammmup/GFrontend" },
           { type: "code", href: "https://github.com/Dammmup/GBackend" },
-          { type: "demo", href: "https://gardenpark-dammmups-projects.vercel.app/" },
+          { type: "demo", href: "https://gardenparkinn.vercel.app" },
         ],
       },
     ],
@@ -330,7 +334,7 @@ function ProjectsComponent() {
         highlights: language === 'ru'
           ? ["Единый интерфейс поиска по нескольким независимым внешним API.", "Сохранение избранного и авторизация на базе Supabase."]
           : ["Single search interface across multiple independent external APIs.", "Favorites storage and Supabase-based authentication."],
-        previews: [],
+        previews: search,
         links: [
           { type: "code", href: "https://github.com/Dammmup/Search_Content" },
           { type: "demo", href: "https://search-content.vercel.app/" },
@@ -345,9 +349,12 @@ function ProjectsComponent() {
         highlights: language === 'ru'
           ? ["Иммерсивное интерактивное 3D-повествование с переходами между сценами."]
           : ["Immersive interactive 3D storytelling with scene transitions."],
-        previews: [],
-        links: [{ type: "code", href: "https://github.com/Dammmup" }],
-      },
+        previews: universe,
+        links: [
+          { type: "code", href: "https://github.com/Dammmup" },
+          { type: "demo", href: "https://universe-flame-one.vercel.app/" },
+        ],
+      }
     ],
     [language]
   );
