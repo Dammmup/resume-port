@@ -1,10 +1,11 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { memo } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../translations";
 
-// Social links data outside the component for efficiency
 const socialLinks = [
   {
-    href: "https://github.com/dammmup",
+    href: "https://github.com/Dammmup",
     title: "GitHub",
     icon: Github,
   },
@@ -21,12 +22,14 @@ const socialLinks = [
 ];
 
 const Footer = memo(() => {
+  const { language } = useLanguage();
+  const t = translations[language].footer;
+  const year = new Date().getFullYear();
+
   return (
     <footer className="w-full bg-muted/30 border-t border-border pt-8 pb-10 mt-32">
       <div className="max-w-5xl mx-auto px-4 sm:px-8 flex flex-col items-center text-center gap-5">
-        <div className="text-sm text-muted-foreground">
-          © 2025 Damir Biyankho. All rights reserved.
-        </div>
+        <div className="text-sm text-muted-foreground">{t.rights.replace('{year}', year)}</div>
         <div className="flex justify-center gap-6">
           {socialLinks.map(({ href, title, icon: Icon }) => (
             <a

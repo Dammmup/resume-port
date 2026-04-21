@@ -1,8 +1,9 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { Mail, Phone, MessageCircle, Linkedin, Github } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../translations";
 
-// --- Animation Variants (The "Staggered Entrance" Pattern) ---
 const sectionContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -20,39 +21,40 @@ const itemVariants = {
   },
 };
 
+const Contact = memo(() => {
+  const { language } = useLanguage();
+  const t = translations[language].contact;
 
-// --- Main Contact Component ---
-function ContactComponent() {
   const contacts = [
     {
       icon: Phone,
-      label: "Телефон",
+      label: language === 'ru' ? "Телефон" : "Phone",
       value: "+7 (747) 831-33-98",
       href: "tel:+77478313398",
     },
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      value: "Написать",
+      value: language === 'ru' ? "Написать" : "Message",
       href: "https://wa.me/77478313398",
     },
     {
       icon: MessageCircle,
       label: "Telegram",
-      value: "Написать",
+      value: "@damir_d",
       href: "https://t.me/damir_d",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      value: "Damir D",
-      href: "https://www.linkedin.com/in/damir-d-449aa6331",
+      value: "Damir Biyankho",
+      href: "https://www.linkedin.com/in/damir-biyankho-558287294/",
     },
     {
       icon: Github,
       label: "GitHub",
-      value: "Damir-code",
-      href: "https://github.com/Damir-code",
+      value: "Dammmup",
+      href: "https://github.com/Dammmup",
     },
   ];
 
@@ -65,33 +67,28 @@ function ContactComponent() {
         className="flex flex-col items-center gap-8 w-full max-w-xl"
       >
         <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
-          <h2 className="text-3xl sm:text-5xl font-bold text-center text-foreground">
-            <span className="inline-flex items-center justify-center gap-3">
-              <Mail className="w-7 h-7 sm:w-9 sm:h-9 text-primary drop-shadow-sm flex-shrink-0 relative top-px sm:top-0.5" />
-              <span>Контакты</span>
-            </span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 flex items-center justify-center gap-4 text-foreground">
+            <Mail className="w-8 h-8 sm:w-11 sm:h-11 text-primary drop-shadow-sm" />
+            {t.title}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4">
-            Свяжитесь со мной любым удобным способом. Я открыт для предложений, вопросов и сотрудничества.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-16 text-center leading-relaxed">
+            {t.description}
           </p>
         </motion.div>
 
         <motion.div variants={itemVariants}>
           <a
             href="mailto:damir.-@mail.ru"
-            className="flex justify-center items-center gap-2 text-primary text-lg font-medium hover:underline transition-colors duration-200"
+            className="flex justify-center items-center gap-2 text-primary text-xl font-bold hover:underline transition-colors duration-200"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Mail className="w-5 h-5" />
+            <Mail className="w-6 h-6" />
             damir.-@mail.ru
           </a>
         </motion.div>
 
-        <motion.div
-          variants={itemVariants}
-          className="w-full max-w-md"
-        >
+        <motion.div variants={itemVariants} className="w-full max-w-md">
           <div className="grid gap-4">
             {contacts.map((contact, index) => (
               <a
@@ -99,13 +96,13 @@ function ContactComponent() {
                 href={contact.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 bg-white/90 dark:bg-neutral-900/80 border border-border/40 dark:border-border/60 rounded-xl shadow hover:shadow-md transition-all duration-200 hover:scale-[1.02]"
+                className="flex items-center gap-4 p-4 bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
               >
-                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">
-                  <contact.icon className="w-5 h-5 text-primary" />
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-primary/10 rounded-xl">
+                  <contact.icon className="w-6 h-6 text-primary" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground">{contact.label}</span>
+                  <span className="text-sm font-semibold text-muted-foreground">{contact.label}</span>
                   <span className="text-foreground font-medium">{contact.value}</span>
                 </div>
               </a>
@@ -115,6 +112,8 @@ function ContactComponent() {
       </motion.div>
     </div>
   );
-}
+});
 
-export default memo(ContactComponent);
+Contact.displayName = "Contact";
+
+export default Contact;

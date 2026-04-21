@@ -1,9 +1,9 @@
 import React, { memo, useMemo } from "react";
-import { ExternalLink, Swords } from "lucide-react";
+import { ExternalLink, Swords, Trophy, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../translations";
 
-// --- Animation Variants (The "Staggered Entrance" Pattern) ---
-// Master container for the entire section
 const sectionContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -12,7 +12,6 @@ const sectionContainerVariants = {
   },
 };
 
-// Nested container for lists/grids inside the section
 const listContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -21,7 +20,6 @@ const listContainerVariants = {
   },
 };
 
-// Single variant for all items that animate in
 const itemVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
@@ -31,131 +29,139 @@ const itemVariants = {
   },
 };
 
-
-// --- Child Components (Unchanged) ---
-const PlatformCard = React.memo(({ platform }) => (
+const RepoCard = memo(({ repo, language }) => (
   <motion.div
     variants={itemVariants}
-    className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6 flex flex-col items-center text-center h-full"
+    className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6 flex flex-col items-start h-full hover:shadow-lg transition-shadow duration-300"
   >
-    <div className="w-16 h-16 rounded-xl overflow-hidden flex items-center justify-center bg-background shadow border border-border/60 mb-4">
-      <img
-        src={platform.logo}
-        alt={`${platform.name} Logo`}
-        className={`w-full h-full object-contain ${
-          platform.name === "CodeChef" ? "dark:invert" : ""
-        }`}
-        loading="lazy"
-      />
+    <div className="text-lg font-semibold text-foreground mb-2">{repo.name}</div>
+    <div className="text-sm text-muted-foreground mb-3 flex-grow leading-relaxed">{repo.desc}</div>
+    <div className="text-sm text-muted-foreground mb-3">
+      <span className="text-foreground/80 font-semibold">{language === 'ru' ? 'Стек' : 'Stack'}:</span> {repo.stack}
     </div>
-    <div className="text-lg font-semibold text-foreground">{platform.name}</div>
-    <div className="text-sm text-muted-foreground mt-1 mb-1">
-      <span className="text-foreground/80">Handle:</span>{" "}
-      <a href={platform.profileUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline dark:hover:text-primary-foreground/70 transition">
-        {platform.handle}
-      </a>
-    </div>
-    <div className="flex flex-col gap-[2px] text-sm text-muted-foreground mb-3">
-      {platform.stats.map((stat, i) => (
-        <div key={i}>
-          {stat.label}:{" "}
-          <span className="font-medium text-foreground/80">{stat.value}</span>
-        </div>
-      ))}
-    </div>
-    <a href={platform.profileUrl} target="_blank" rel="noopener noreferrer" className="mt-auto pt-3 flex items-center gap-1 text-primary font-medium text-sm hover:underline dark:hover:text-primary-foreground/70 transition">
+    <a 
+      href={repo.url} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="mt-auto pt-2 flex items-center gap-1 text-primary font-medium text-sm hover:underline hover:text-foreground dark:hover:text-primary-foreground/70 transition-colors"
+    >
       <ExternalLink className="w-4 h-4" />
-      View Profile
+      {language === 'ru' ? 'Открыть репозиторий' : 'Open Repository'}
     </a>
   </motion.div>
 ));
-PlatformCard.displayName = "PlatformCard";
+RepoCard.displayName = "RepoCard";
 
-const HighlightItem = React.memo(({ item }) => (
-  <motion.li variants={itemVariants}>
-    {item.text}
-    <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline dark:hover:text-primary-foreground/70 font-medium transition">
-      {item.linkText}
-    </a>
-    {item.rest}
-  </motion.li>
-));
-HighlightItem.displayName = "HighlightItem";
+const CP = memo(() => {
+  const { language } = useLanguage();
+  const t = translations[language].cp;
 
+  const featuredRepos = useMemo(
+    () => [
+      {
+        name: "detsad_b",
+        desc: language === 'ru' 
+          ? "Бэкенд ERP-системы управления детским садом: авторизация, медицина, питание, бухгалтерия, уведомления и автоматические задачи."
+          : "Backend for Kindergarten ERP system: auth, medicine, nutrition, accounting, notifications, and cron jobs.",
+        stack: "TypeScript, Node.js, Express, MongoDB, Firebase, node-cron",
+        url: "https://github.com/Dammmup/detsad_b",
+      },
+      {
+        name: "detsad_f",
+        desc: language === 'ru'
+          ? "Админ-панель фронтенда со сложными дашбордами и модулями для ежедневных операций."
+          : "Frontend admin panel with complex dashboards and modules for daily operations.",
+        stack: "React, TypeScript, Vite, MUI, Redux",
+        url: "https://github.com/Dammmup/detsad_f",
+      },
+      {
+        name: "ur-front / ur-ba",
+        desc: language === 'ru'
+          ? "Архитектура из двух репозиториев для мультиязычной SaaS-платформы с ролевым доступом к образовательным процессам."
+          : "Multi-repository architecture for a multi-language SaaS platform with RBAC for educational processes.",
+        stack: "React, TypeScript, Express, MongoDB, JWT, i18n",
+        url: "https://github.com/Dammmup/ur-front",
+      },
+      {
+        name: "Search_Content",
+        desc: language === 'ru'
+          ? "Продукт-агрегатор с интеграцией нескольких API, избранным и авторизацией."
+          : "Aggregator product with multiple API integrations, favorites, and authentication.",
+        stack: "React, Redux Toolkit, Supabase, Express",
+        url: "https://github.com/Dammmup/Search_Content",
+      },
+    ],
+    [language]
+  );
 
-// --- Main Component ---
-function CompetitiveProgrammingComponent() {
-  const cpPlatforms = useMemo(() => [
-    { name: "Codeforces", logo: "/assets/logos/codeforces.png", handle: "shashank2401", profileUrl: "https://codeforces.com/profile/shashank2401", stats: [{ label: "Max Rating", value: "1600" }, { label: "Rank", value: "Expert" }] },
-    { name: "CodeChef", logo: "/assets/logos/codechef.svg", handle: "shashankraj24", profileUrl: "https://www.codechef.com/users/shashankraj24", stats: [{ label: "Max Rating", value: "1954" }, { label: "Rank", value: "4-Star" }] },
-    { name: "LeetCode", logo: "/assets/logos/leetcode.png", handle: "shashank2401", profileUrl: "https://leetcode.com/u/shashank2401/", stats: [{ label: "Max Rating", value: "2022" }, { label: "Badge", value: "Knight" }] },
-    { name: "AtCoder", logo: "/assets/logos/atcoder.png", handle: "shashank24", profileUrl: "https://atcoder.jp/users/shashank24", stats: [{ label: "Max Rating", value: "927" }, { label: "Rank", value: "6 Kyu" }] },
-  ], []);
-
-  const highlights = useMemo(() => [
-    { text: "Solved over ", linkText: "900+ problems", href: "https://codolio.com/profile/shashank24", rest: " across multiple CP platforms, enhancing algorithmic thinking and coding efficiency." },
-    { text: "Participated in more than ", linkText: "100 contests", href: "https://codolio.com/profile/shashank24", rest: ", consistently testing and improving my problem-solving skills." },
-    { text: "Ranked among the top with a ", linkText: "Global Rank of 755", href: "https://codeforces.com/contest/2114/standings/participant/211255102#p211255102", rest: " in Codeforces Round 1027 (Div. 3)." },
-    { text: "Achieved a notable ", linkText: "Global Rank of 849", href: "https://codeforces.com/contest/2090/standings/participant/206688395#p206688395", rest: " in Codeforces Round 1012 (Div. 2)." },
-    { text: "Earned a ", linkText: "Top 100 finish (Rank 99)", href: "https://www.codechef.com/rankings/START154D?itemsPerPage=100&order=asc&page=1&sortBy=rank", rest: " in CodeChef Starters 154 (Div. 4)." },
-    { text: "Demonstrated strong performance with a ", linkText: "Global Rank of 120", href: "https://www.codechef.com/rankings/START187B?itemsPerPage=100&order=asc&page=1&sortBy=rank", rest: " in CodeChef Starters 187 (Div. 2)." },
-  ], []);
+  const ACHIEVEMENTS = useMemo(
+    () => [
+      {
+        id: "leetcode",
+        icon: <Trophy className="w-5 h-5 text-yellow-500" />,
+        stat: "150+",
+        label: t.stats.solved,
+        description: t.descriptions.leetcode,
+      },
+      {
+        id: "it-run",
+        icon: <Award className="w-5 h-5 text-blue-500" />,
+        stat: language === 'ru' ? "1 место" : "1st Place",
+        label: t.stats.rank,
+        description: t.descriptions.itRun,
+      },
+    ],
+    [t, language]
+  );
 
   return (
     <div className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 py-12">
-      <motion.div
-        variants={sectionContainerVariants}
-        initial="hidden"
-        animate="visible"
-        className="flex flex-col items-center w-full space-y-16"
-      >
-        <motion.div variants={itemVariants} className="flex flex-col items-center text-center max-w-2xl">
-          {/* --- THIS IS THE FIXED HEADING --- */}
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight flex flex-col sm:flex-row items-center sm:items-baseline justify-center gap-2 sm:gap-4 text-foreground text-center">
-            <Swords className="w-8 h-8 text-primary drop-shadow-sm flex-shrink-0" />
-            <span>Competitive Programming</span>
+      <motion.div variants={sectionContainerVariants} initial="hidden" animate="visible" className="flex flex-col items-center w-full space-y-16">
+        <motion.div variants={itemVariants} className="flex flex-col items-center text-center max-w-2xl leading-relaxed">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 flex items-center gap-4 text-foreground justify-center">
+            <Trophy className="w-8 h-8 sm:w-11 sm:h-11 text-primary drop-shadow-sm" />
+            {t.title}
           </h2>
           <p className="text-lg text-muted-foreground">
-            My competitive programming journey has been filled with challenging
-            problems, thrilling contests, and constant learning. Here you’ll find my
-            profiles, stats, and some highlights from major platforms.
+            {t.description}
           </p>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="w-full max-w-5xl">
-          <motion.div
-            variants={listContainerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {cpPlatforms.map((platform) => (
-              <PlatformCard key={platform.name} platform={platform} />
-            ))}
-          </motion.div>
+        {/* Achievements Section */}
+        <motion.div variants={itemVariants} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8">
+          {ACHIEVEMENTS.map((ach) => (
+            <div key={ach.id} className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6 flex gap-4 hover:shadow-lg transition-shadow duration-300">
+              <div className="p-3 bg-muted rounded-xl self-start">
+                {ach.icon}
+              </div>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-bold text-foreground">{ach.stat}</span>
+                  <span className="text-sm font-semibold text-primary">{ach.label}</span>
+                </div>
+                <p className="text-sm text-muted-foreground">{ach.description}</p>
+              </div>
+            </div>
+          ))}
         </motion.div>
 
-        <motion.div variants={itemVariants} className="w-full max-w-3xl">
-          <div className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-4">
-              Key Highlights
-            </h3>
-            <p className="text-base text-muted-foreground mb-4">
-              <a href="https://codolio.com/profile/shashank24" className="text-primary hover:underline dark:hover:text-primary-foreground/70 transition font-medium" target="_blank" rel="noopener noreferrer">
-                View my Codolio Profile for more details
-              </a>
-            </p>
-            <motion.ul
-              variants={listContainerVariants}
-              className="list-disc ml-5 space-y-2 text-base text-muted-foreground"
-            >
-              {highlights.map((item, index) => (
-                <HighlightItem key={index} item={item} />
-              ))}
-            </motion.ul>
-          </div>
-        </motion.div>
+        {/* Repos Section */}
+        <div className="w-full max-w-5xl space-y-8">
+          <motion.h3 variants={itemVariants} className="text-2xl font-bold text-foreground flex items-center gap-2">
+            <Swords className="w-6 h-6 text-primary" />
+            {language === 'ru' ? 'Избранные репозитории' : 'Featured Repositories'}
+          </motion.h3>
+          <motion.div variants={listContainerVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+            {featuredRepos.map((repo) => (
+              <RepoCard key={repo.name} repo={repo} language={language} />
+            ))}
+          </motion.div>
+        </div>
       </motion.div>
     </div>
   );
-}
+});
 
-export default React.memo(CompetitiveProgrammingComponent);
+CP.displayName = "CP";
+
+export default CP;

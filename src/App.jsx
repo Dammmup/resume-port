@@ -14,6 +14,7 @@ import Academics from "./components/Academics";
 import Projects from "./components/Projects";
 import CP from "./components/CP";
 import Contact from "./components/Contact";
+import { LanguageProvider } from "./context/LanguageContext";
 
 
 // --- NEW AWESOME BACKGROUND ---
@@ -115,18 +116,20 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <ScrollToTop />
-      <Layout 
-        theme={theme} 
-        toggleTheme={toggleTheme} 
-        sideNavOpen={sideNavOpen}
-        setSideNavOpen={setSideNavOpen}
-      >
-        <AnimatedRoutes />
-      </Layout>
-      <Analytics />
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <ScrollToTop />
+        <Layout 
+          theme={theme} 
+          toggleTheme={toggleTheme} 
+          sideNavOpen={sideNavOpen}
+          setSideNavOpen={setSideNavOpen}
+        >
+          <AnimatedRoutes />
+        </Layout>
+        <Analytics />
+      </Router>
+    </LanguageProvider>
   );
 }
 

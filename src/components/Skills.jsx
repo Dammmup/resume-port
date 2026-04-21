@@ -1,20 +1,19 @@
 import React, { useState, useCallback, useMemo, memo } from "react";
-import { Code, Layers, Terminal, Sparkles, Settings2 } from "lucide-react";
+import { Code, Layers, Terminal, Sparkles, Settings2, Languages } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../translations";
 
-// --- Animation Variants (The "Staggered Entrance" Pattern) ---
-// This container will orchestrate the animation for the whole page
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, // Time delay between each child animating in
+      staggerChildren: 0.1,
     },
   },
 };
 
-// This variant will be used by each item in the container
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -27,121 +26,186 @@ const itemVariants = {
   },
 };
 
-// --- Child Components (No changes needed) ---
-const SkillTag = memo(({ tag, onMouseEnter, onMouseLeave, className }) => (
-  <span
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-    className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-150 ${className} text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-200 dark:hover:bg-neutral-700`}
-  >
-    {tag}
-  </span>
-));
+const ICON_MAP = {
+  "React": "react",
+  "TypeScript": "typescript",
+  "Material UI": "materialui",
+  "Ant Design": "antdesign",
+  "Node.js": "nodejs",
+  "Express": "express",
+  "MongoDB": "mongodb",
+  "Firebase": "firebase",
+  "Digital Ocean": "digitalocean",
+  "GitHub": "github",
+  "Docker": "docker",
+  "Vercel": "vercel",
+  "Postman": "postman",
+  "Supabase": "supabase",
+  "Redis": "redis",
+  "Gitlab": "gitlab",
+  "Jira": "jira",
+  "Confluence": "confluence",
+  "Tailwind": "tailwindcss",
+  "Framer": "framermotion",
+  "Redux": "redux",
+  "Flutter": "flutter",
+  "Sentry": "sentry",
+  "Chart.js": "chartjs",
+};
+
+const getIconUrl = (name) => {
+  const lowercaseName = name.toLowerCase();
+  
+  // Custom manual mappings for tools not in simple devicon pattern
+  if (lowercaseName.includes('1c')) return "https://upload.wikimedia.org/wikipedia/commons/e/e0/1C_Company_logo.svg";
+  if (lowercaseName.includes('groq') || lowercaseName.includes('gemini') || lowercaseName.includes('ai')) {
+    return "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d47353046b33535d452f.svg";
+  }
+  if (lowercaseName.includes('yandex')) return "https://yastatic.net/s3/home/services/all/v2/maps.svg";
+
+  const key = Object.keys(ICON_MAP).find(k => name.includes(k));
+  if (!key) return null;
+  const icon = ICON_MAP[key];
+
+  if (icon === 'express') {
+    return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg";
+  }
+
+  return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon}/${icon}-original.svg`;
+};
+
+const SkillTag = memo(({ tag, isHovered, onMouseEnter, onMouseLeave, className }) => {
+  const iconUrl = useMemo(() => getIconUrl(tag), [tag]);
+
+  return (
+    <span
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className={`px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${className} text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700 hover:border-primary/50 dark:hover:border-primary/50 shadow-sm flex items-center gap-2`}
+    >
+      {iconUrl && (
+        <img
+          src={iconUrl}
+          alt=""
+          className="w-4 h-4 object-contain filter dark:brightness-110"
+          onError={(e) => { e.target.style.display = 'none' }}
+        />
+      )}
+      {tag}
+    </span>
+  );
+});
 SkillTag.displayName = "SkillTag";
 
 const SkillSection = memo(({ section, hoveredTag, onTagHover, onTagLeave }) => {
   const { icon, title, tags } = section;
 
-  const tagElements = useMemo(
-    () =>
-      tags.map((tag, i) => {
-        const tagId = `${title}-${i}`;
-        const isHovered = hoveredTag === tagId;
-        return (
-          <SkillTag
-            key={tag}
-            tag={tag}
-            className={
-              isHovered
-                ? "bg-neutral-200 dark:bg-neutral-700"
-                : "bg-neutral-100 dark:bg-neutral-800"
-            }
-            onMouseEnter={() => onTagHover(tagId)}
-            onMouseLeave={onTagLeave}
-          />
-        );
-      }),
-    [tags, title, hoveredTag, onTagHover, onTagLeave]
-  );
-
   return (
-    // This card is now an item in the grid's stagger animation
     <motion.div
       variants={itemVariants}
-      className="rounded-2xl bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 shadow p-6 flex flex-col"
+      className="rounded-2xl bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border border-neutral-200 dark:border-neutral-700 shadow-sm p-6 flex flex-col hover:shadow-md transition-shadow duration-300"
     >
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-3 rounded-xl bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 shadow-sm">
+        <div className="p-2.5 rounded-xl bg-primary/10 text-primary shadow-inner">
           {icon}
         </div>
-        <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100">
-          {title}
-        </h3>
+        <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-100">{title}</h3>
       </div>
-      <div className="flex flex-wrap gap-3">{tagElements}</div>
+      <div className="flex flex-wrap gap-2.5">
+        {tags.map((tag, i) => {
+          const tagName = tag.name || tag;
+          const tagId = `${title}-${i}`;
+          const isHovered = hoveredTag === tagId;
+          return (
+            <SkillTag
+              key={tagName}
+              tag={tagName}
+              className={isHovered ? "bg-primary/10 border-primary/30" : "bg-neutral-50/50 dark:bg-neutral-800/50"}
+              onMouseEnter={() => onTagHover(tagId)}
+              onMouseLeave={onTagLeave}
+            />
+          );
+        })}
+      </div>
     </motion.div>
   );
 });
 SkillSection.displayName = "SkillSection";
 
-// --- Static Data (No changes needed) ---
-const SKILLS_SECTIONS = [
-  {
-    icon: <Code className="w-6 h-6" />,
-    title: "Languages",
-    tags: ["JavaScript", "TypeScript", "C++", "C#"],
-  },
-  {
-    icon: <Layers className="w-6 h-6" />,
-    title: "Frameworks and Libraries",
-    tags: ["React", "Next.js", "Node.js", "Express", "Bootstrap", "Material-UI", "Ant Design", "Firebase", "Sentry"],
-  },
-  {
-    icon: <Terminal className="w-6 h-6" />,
-    title: "Tools and Platforms",
-    tags: ["Git", "GitHub", "Docker", "Redis", "MongoDB", "Jira", "Postman", "Confluence", "Bitbucket", "Vercel", "Railway"],
-  },
-  {
-    icon: <Sparkles className="w-6 h-6" />,
-    title: "Interests",
-    tags: ["Web Development", "Microservices", "Clean Code", "Open Source", "Vibecoding"],
-  },
-];
-
-// --- Main Skills Component ---
 const SkillsComponent = memo(function Skills() {
   const [hoveredTag, setHoveredTag] = useState(null);
   const handleTagHover = useCallback((tagId) => setHoveredTag(tagId), []);
   const handleTagLeave = useCallback(() => setHoveredTag(null), []);
 
+  const { language } = useLanguage();
+  const t = translations[language].skills;
+
+  const SKILLS_SECTIONS = useMemo(() => [
+    {
+      icon: <Code className="w-6 h-6" />,
+      title: t.categories.frontend,
+      tags: [
+        { name: "React / Vite / Next.js", level: 95 },
+        { name: "TypeScript", level: 92 },
+        { name: "Flutter (Dart)", level: 88 },
+        { name: "Ant Design / MUI", level: 90 },
+        { name: "Redux / Zustand", level: 90 },
+        { name: "Tailwind CSS", level: 90 },
+        { name: "Framer Motion / GSAP", level: 85 },
+      ],
+    },
+    {
+      icon: <Terminal className="w-6 h-6" />,
+      title: t.categories.backend,
+      tags: [
+        { name: "Node.js (Express)", level: 92 },
+        { name: "MongoDB (Mongoose)", level: 90 },
+        { name: "1C-Integration / ERP", level: 85 },
+        { name: "AI (Groq / Gemini API)", level: 88 },
+        { name: "JWT / OAuth / RBAC", level: 92 },
+        { name: `node-cron / ${language === 'ru' ? 'Автоматизация' : 'Automation'}`, level: 85 },
+      ],
+    },
+    {
+      icon: <Sparkles className="w-6 h-6" />,
+      title: t.categories.tools,
+      tags: [
+        { name: "Digital Ocean / VPS", level: 92 },
+        { name: "Git / GitHub / GitLab", level: 95 },
+        { name: "Sentry / Monitoring", level: 80 },
+        { name: "Vercel / Firebase", level: 90 },
+        { name: "Postman / API Design", level: 92 },
+        { name: "Yandex / Google Maps", level: 85 },
+      ],
+    },
+    {
+      icon: <Layers className="w-6 h-6" />,
+      title: t.categories.other,
+      tags: [
+        { name: "Supabase / Redis", level: 85 },
+        { name: "Jira / Atlassian", level: 88 },
+        { name: "Docx / PDF Gen", level: 80 },
+        { name: "Recharts / Charts.js", level: 85 },
+        { name: "Docker", level: 65 },
+      ],
+    },
+
+  ], [t, language]);
+
   return (
     <div className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 py-12">
-      {/* 1. This is the SINGLE animation container for the whole page. */}
-      {/* It uses `animate`, not `whileInView`, for guaranteed execution. */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="flex flex-col items-center w-full"
-      >
-        {/* Item 1: The header text block */}
+      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="flex flex-col items-center w-full">
         <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4 flex items-center gap-4 text-foreground">
             <Settings2 className="w-8 h-8 sm:w-11 sm:h-11 text-primary drop-shadow-sm" />
-            Skills & Interests
+            {t.title}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            Here you'll find a snapshot of my technical toolkit and passions. I
-            believe in learning by doing, and my skills reflect a blend of academic
-            depth and hands-on project work.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+            {t.description}
           </p>
         </motion.div>
 
-        {/* Item 2: The entire skill card grid animates in as one block... */}
-        <motion.div
-          variants={containerVariants} // It's also a container for its own children
-          className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
+        <motion.div variants={containerVariants} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {SKILLS_SECTIONS.map((section) => (
             <SkillSection
               key={section.title}
