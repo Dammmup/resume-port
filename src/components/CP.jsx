@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { ExternalLink, Swords, Trophy, Award } from "lucide-react";
+import { ExternalLink, Swords, Trophy, Zap, Cloud, MapPin, Bot } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../translations";
@@ -94,25 +94,19 @@ const CP = memo(() => {
     [language]
   );
 
-  const ACHIEVEMENTS = useMemo(
-    () => [
-      {
-        id: "leetcode",
-        icon: <Trophy className="w-5 h-5 text-yellow-500" />,
-        stat: "150+",
-        label: t.stats.solved,
-        description: t.descriptions.leetcode,
-      },
-      {
-        id: "it-run",
-        icon: <Award className="w-5 h-5 text-blue-500" />,
-        stat: language === 'ru' ? "1 место" : "1st Place",
-        label: t.stats.rank,
-        description: t.descriptions.itRun,
-      },
-    ],
-    [t, language]
-  );
+  const ACHIEVEMENTS = useMemo(() => {
+    const icons = {
+      caching: <Zap className="w-5 h-5 text-yellow-500" />,
+      google_drive: <Cloud className="w-5 h-5 text-blue-500" />,
+      geofencing: <MapPin className="w-5 h-5 text-green-500" />,
+      ai_assistant: <Bot className="w-5 h-5 text-purple-500" />,
+    };
+
+    return t.achievements.map((ach) => ({
+      ...ach,
+      icon: icons[ach.id],
+    }));
+  }, [t.achievements]);
 
   return (
     <div className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 py-12">

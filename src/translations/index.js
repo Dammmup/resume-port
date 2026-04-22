@@ -24,6 +24,7 @@ export const translations = {
         backend: "Backend Development",
         tools: "Dev Tools",
         other: "Other Tools",
+        database: "Database",
         languages: "Languages"
       },
       levels: {
@@ -116,14 +117,32 @@ export const translations = {
     cp: {
       title: "Engineering Highlights",
       description: "Selected repositories and direct engineering contributions reflecting my current focus.",
-      stats: {
-        solved: "Solved",
-        rank: "Hackathon Result"
-      },
-      descriptions: {
-        leetcode: "Active focus on competitive programming, mastering algorithms and data structures.",
-        itRun: "Winner of 'IT-Run' tech challenge among university students."
-      },
+      achievements: [
+        {
+          id: "caching",
+          stat: "Performance",
+          label: "Data Caching",
+          description: "Optimized page load speed via multi-month data caching."
+        },
+        {
+          id: "google_drive",
+          stat: "Automation",
+          label: "Cloud Sync",
+          description: "Automated data synchronization with Google Drive."
+        },
+        {
+          id: "geofencing",
+          stat: "Security",
+          label: "Geofencing",
+          description: "Developed custom geofencing system from the ground up."
+        },
+        {
+          id: "ai_assistant",
+          stat: "AI Core",
+          label: "Smart Assistant",
+          description: "Integrated a low-latency AI assistant with full CRUD access for project knowledge."
+        }
+      ],
       repos: {
         frontend: "Modern UI/UX with React, Ant Design, and Framer Motion.",
         backend: "Scaleable Node.js architecture with MongoDB and Redis.",
@@ -171,6 +190,7 @@ export const translations = {
         backend: "Бэкенд разработка",
         tools: "Инструменты разработки",
         other: "Другие инструменты",
+        database: "Базы данных",
         languages: "Языки"
       },
       levels: {
@@ -264,14 +284,32 @@ export const translations = {
     cp: {
       title: "Технические достижения",
       description: "Избранные репозитории и инженерный вклад, отражающие мою текущую практику разработки.",
-      stats: {
-        solved: "Решено",
-        rank: "Результат хакатона"
-      },
-      descriptions: {
-        leetcode: "Активное участие в соревнованиях на LeetCode, оттачивание навыков в алгоритмах и структурах данных.",
-        itRun: "Победитель конкурса 'IT-Run' среди студентов, представивший лучшее техническое решение."
-      },
+      achievements: [
+        {
+          id: "caching",
+          stat: "Оптимизация",
+          label: "Кэширование",
+          description: "Оптимизировал скорость загрузки страницы кэшированием прошлых месяцев."
+        },
+        {
+          id: "google_drive",
+          stat: "Автоматизация",
+          label: "Google Drive",
+          description: "Автоматизировал выгрузку данных в google drive."
+        },
+        {
+          id: "geofencing",
+          stat: "Безопасность",
+          label: "Геофенсинг",
+          description: "Реализовал с 0 геофенснинг."
+        },
+        {
+          id: "ai_assistant",
+          stat: "AI-ядро",
+          label: "Умный помощник",
+          description: "Интегрировал умного ии-асистента с crud-операциями на платформу который может ответить на любой вопрос связанный с проектом с минимальной задержкой."
+        }
+      ],
       repos: {
         frontend: "Современный UI/UX с React, Ant Design и Framer Motion.",
         backend: "Масштабируемая архитектура Node.js с MongoDB и Redis.",

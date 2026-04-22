@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo, memo } from "react";
-import { Code, Layers, Terminal, Sparkles, Settings2, Languages } from "lucide-react";
+import { Code, Layers, Terminal, Sparkles, Settings2, Languages, Database } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../translations";
@@ -27,51 +27,74 @@ const itemVariants = {
 };
 
 const ICON_MAP = {
-  "React": "react",
-  "TypeScript": "typescript",
-  "Material UI": "materialui",
-  "Ant Design": "antdesign",
-  "Node.js": "nodejs",
-  "Express": "express",
-  "MongoDB": "mongodb",
-  "Firebase": "firebase",
-  "Digital Ocean": "digitalocean",
-  "GitHub": "github",
-  "Docker": "docker",
-  "Vercel": "vercel",
-  "Postman": "postman",
-  "Supabase": "supabase",
-  "Redis": "redis",
-  "Gitlab": "gitlab",
-  "Jira": "jira",
-  "Confluence": "confluence",
-  "Tailwind": "tailwindcss",
-  "Framer": "framermotion",
-  "Redux": "redux",
-  "Flutter": "flutter",
-  "Sentry": "sentry",
-  "Chart.js": "chartjs",
+  "react": "react",
+  "typescript": "typescript",
+  "material ui": "mui",
+  "ant design": "antdesign",
+  "node.js": "nodedotjs",
+  "express": "express",
+  "mongodb": "mongodb",
+  "firebase": "firebase",
+  "digital ocean": "digitalocean",
+  "github": "github",
+  "docker": "docker",
+  "vercel": "vercel",
+  "postman": "postman",
+  "supabase": "supabase",
+  "redis": "redis",
+  "gitlab": "gitlab",
+  "jira": "jira",
+  "tailwind": "tailwindcss",
+  "framer": "framer",
+  "redux": "redux",
+  "flutter": "flutter",
+  "sentry": "sentry",
+  "chart.js": "chartdotjs",
+  "vite": "vite",
+  "next.js": "nextdotjs",
+  "zustand": "zustand",
+  "jwt": "jsonwebtokens",
+  "oauth": "jsonwebtokens",
+  "git": "git",
+  "yandex": "yandex",
+  "google maps": "googlemaps",
+  "maps": "googlemaps",
+  "docx": "microsoftword",
+  "word": "microsoftword",
+  "pdf": "adobepdf",
+  "ai": "googlegemini",
+  "groq": "groq",
+  "gemini": "googlegemini",
+  "cron": "speedtest",
+  "automation": "speedtest",
 };
 
 const getIconUrl = (name) => {
-  const lowercaseName = name.toLowerCase();
+  const n = name.toLowerCase();
+
+  // Manual high-priority overrides for things not in standard icon sets or needing specific logos
+  if (n.includes('1c')) return "https://www.google.com/s2/favicons?domain=1c.ru&sz=128";
+  if (n.includes('typegoose')) return "https://avatars.githubusercontent.com/u/4155121?s=200&v=4";
   
-  // Custom manual mappings for tools not in simple devicon pattern
-  if (lowercaseName.includes('1c')) return "https://upload.wikimedia.org/wikipedia/commons/e/e0/1C_Company_logo.svg";
-  if (lowercaseName.includes('groq') || lowercaseName.includes('gemini') || lowercaseName.includes('ai')) {
-    return "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d47353046b33535d452f.svg";
-  }
-  if (lowercaseName.includes('yandex')) return "https://yastatic.net/s3/home/services/all/v2/maps.svg";
+  // Using Google Favicon API as a very reliable fallback for external services
+  if (n.includes('yandex')) return "https://www.google.com/s2/favicons?domain=yandex.ru&sz=128";
+  if (n.includes('maps')) return "https://www.google.com/s2/favicons?domain=maps.google.com&sz=128";
+  if (n.includes('docx') || n.includes('word')) return "https://www.google.com/s2/favicons?domain=microsoft.com&sz=128";
+  if (n.includes('pdf')) return "https://www.google.com/s2/favicons?domain=adobe.com&sz=128";
 
-  const key = Object.keys(ICON_MAP).find(k => name.includes(k));
+  // Use the word-boundary check for 'ai' to avoid false positives inside words
+  if (/\bai\b/i.test(n) || n.includes('(ai)') || n.includes('groq') || n.includes('gemini')) {
+    return "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128";
+  }
+
+  // Find matching key case-insensitively
+  const key = Object.keys(ICON_MAP).find(k => n.includes(k));
   if (!key) return null;
-  const icon = ICON_MAP[key];
 
-  if (icon === 'express') {
-    return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg";
-  }
-
-  return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon}/${icon}-original.svg`;
+  const slug = ICON_MAP[key];
+  
+  // Use Simple Icons CDN - robust, colored SVGs
+  return `https://cdn.simpleicons.org/${slug}`;
 };
 
 const SkillTag = memo(({ tag, isHovered, onMouseEnter, onMouseLeave, className }) => {
@@ -146,8 +169,6 @@ const SkillsComponent = memo(function Skills() {
       title: t.categories.frontend,
       tags: [
         { name: "React / Vite / Next.js", level: 95 },
-        { name: "TypeScript", level: 92 },
-        { name: "Flutter (Dart)", level: 88 },
         { name: "Ant Design / MUI", level: 90 },
         { name: "Redux / Zustand", level: 90 },
         { name: "Tailwind CSS", level: 90 },
@@ -160,33 +181,43 @@ const SkillsComponent = memo(function Skills() {
       tags: [
         { name: "Node.js (Express)", level: 92 },
         { name: "MongoDB (Mongoose)", level: 90 },
-        { name: "1C-Integration / ERP", level: 85 },
-        { name: "AI (Groq / Gemini API)", level: 88 },
+        { name: "TypeScript", level: 92 },
         { name: "JWT / OAuth / RBAC", level: 92 },
         { name: `node-cron / ${language === 'ru' ? 'Автоматизация' : 'Automation'}`, level: 85 },
+        { name: "Typegoose", level: 90 },
       ],
     },
     {
       icon: <Sparkles className="w-6 h-6" />,
       title: t.categories.tools,
       tags: [
-        { name: "Digital Ocean / VPS", level: 92 },
+        { name: "Digital Ocean / CPU", level: 92 },
         { name: "Git / GitHub / GitLab", level: 95 },
         { name: "Sentry / Monitoring", level: 80 },
         { name: "Vercel / Firebase", level: 90 },
         { name: "Postman / API Design", level: 92 },
-        { name: "Yandex / Google Maps", level: 85 },
+        { name: "Docker", level: 65 },
+      ],
+    },
+    {
+      icon: <Database className="w-6 h-6" />,
+      title: t.categories.database,
+      tags: [
+        { name: "MongoDB (Mongoose)", level: 90 },
+        { name: "Redis", level: 85 },
+        { name: "Supabase", level: 85 },
       ],
     },
     {
       icon: <Layers className="w-6 h-6" />,
       title: t.categories.other,
       tags: [
-        { name: "Supabase / Redis", level: 85 },
         { name: "Jira / Atlassian", level: 88 },
         { name: "Docx / PDF Gen", level: 80 },
-        { name: "Recharts / Charts.js", level: 85 },
-        { name: "Docker", level: 65 },
+        { name: "1C-Integration / ERP", level: 85 },
+        { name: "AI (Groq / Gemini API)", level: 88 },
+        { name: "Yandex / Google Maps", level: 85 },
+        { name: "Flutter (Dart)", level: 88 },
       ],
     },
 
