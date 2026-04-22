@@ -57,12 +57,12 @@ const About = () => {
   return (
     <div className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 py-20 relative overflow-hidden">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-        
+
         {/* Left Column: Text Content */}
-        <motion.div 
-          initial="initial" 
-          animate="animate" 
-          variants={fadeInUp} 
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={fadeInUp}
           className="flex flex-col gap-8 order-2 lg:order-1"
         >
           <div className="flex flex-col gap-4">
@@ -79,7 +79,7 @@ const About = () => {
             >
               Damir <span className="text-primary">Biyankho</span>
             </motion.h1>
-            
+
             <motion.h2
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -99,10 +99,10 @@ const About = () => {
             </div>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            transition={{ delay: 0.5 }} 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
             className="space-y-6"
           >
             <h3 className="text-2xl font-bold text-foreground">
@@ -157,7 +157,7 @@ const About = () => {
         </motion.div>
 
         {/* Right Column: Profile Image / Visual */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
@@ -168,10 +168,10 @@ const About = () => {
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse" />
             <div className="absolute -inset-4 border-2 border-primary/10 rounded-full animate-[spin_20s_linear_infinite]" />
             <div className="absolute -inset-8 border border-primary/5 rounded-full animate-[spin_30s_linear_infinite_reverse]" />
-            
+
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-neutral-900 shadow-2xl bg-muted">
               <img
-                src="/assets/MyPhotograph.png"
+                src="/assets/damir.png"
                 alt="Damir Biyankho"
                 loading="lazy"
                 decoding="async"
