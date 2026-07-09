@@ -349,26 +349,26 @@ function ProjectsComponent() {
       {
         title: "Designer Partner Program",
         desc: language === "ru"
-          ? "Партнерская mini-ERP для дизайнеров интерьеров: дизайнеры, менеджеры, проекты, заявки, заказы, бонусы, лояльность, промокоды, каталог товаров и интеграция с Bitrix24. Уникальность проекта в том, что он связывает CRM, каталог, бонусную экономику и рабочий кабинет дизайнера в одну операционную систему."
-          : "Partner mini-ERP for interior designers: designers, managers, projects, requests, orders, bonuses, loyalty, promocodes, product catalog, and Bitrix24 integration. Its uniqueness is connecting CRM, catalog, bonus economy, and designer workspace into one operating system.",
+          ? "Партнерская mini-ERP для дизайнеров интерьеров: дизайнеры, менеджеры, проекты, заявки, заказы, бонусы, лояльность, промокоды, каталог товаров и интеграция с Bitrix24. Внутри есть AI-примерочная комнаты по товарам из каталога, голосовая диктовка для заполнения проектов и калькулятор краски. Уникальность проекта в том, что он связывает CRM, каталог, бонусную экономику и рабочий кабинет дизайнера в одну операционную систему."
+          : "Partner mini-ERP for interior designers: designers, managers, projects, requests, orders, bonuses, loyalty, promocodes, product catalog, and Bitrix24 integration. It includes an AI room try-on based on catalog products, voice dictation for project filling, and a paint calculator. Its uniqueness is connecting CRM, catalog, bonus economy, and designer workspace into one operating system.",
         tags: ["NestJS", "React", "MongoDB", "Bitrix24", "BullMQ", "Redis", "Sentry", "DigitalOcean"],
         stack: {
           frontend: ["React 18", "Vite", "TypeScript", "React Router", "NProgress"],
           backend: ["NestJS", "TypeScript", "MongoDB", "Mongoose", "JWT", "Passport", "Swagger"],
-          integrations: ["Bitrix24 CRM", "BullMQ", "Redis", "Sentry", "Telegram", "Nodemailer", "DigitalOcean"],
+          integrations: ["Bitrix24 CRM", "AI room try-on", "Voice dictation", "Paint calculator", "BullMQ", "Redis", "Sentry", "Telegram", "DigitalOcean"],
         },
         highlights: language === "ru"
           ? [
               "Bitrix24 используется как источник сделок и товаров, а данные маппятся в собственную доменную модель.",
               "Система рассчитывает бонусы, уровни лояльности и историю начислений для дизайнеров.",
-              "Каталог и заявки связаны с реальными проектами, товарами, КП и рабочими процессами менеджеров.",
-              "Есть production-oriented инфраструктура: health, Sentry, Redis/BullMQ, Telegram и деплой на droplet."
+              "AI-примерочная принимает до 12-14 фотографий товаров из каталога и генерирует примерное видение готовой комнаты из чернового варианта.",
+              "Голосовая диктовка помогает заполнять проекты быстрее, включая поддержку казахского языка."
             ]
           : [
               "Bitrix24 acts as the source for deals and products, mapped into a custom domain model.",
               "The system calculates bonuses, loyalty levels, and transaction history for designers.",
-              "Catalog and requests are tied to real projects, products, proposals, and manager workflows.",
-              "Production-oriented setup with health checks, Sentry, Redis/BullMQ, Telegram, and droplet deployment."
+              "AI room try-on accepts up to 12-14 catalog product photos and generates an approximate finished-room vision from a rough draft.",
+              "Voice dictation speeds up project filling, including Kazakh language support."
             ],
         previews: [],
         links: [],

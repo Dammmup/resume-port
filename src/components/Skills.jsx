@@ -227,6 +227,8 @@ const SkillsComponent = memo(function Skills() {
         { name: "1C-Integration / ERP", level: 85 },
         { name: "Bitrix Integration", level: 85 },
         { name: "AI (Groq / Gemini API)", level: 88 },
+        { name: "AI Image Generation", level: 82 },
+        { name: "Voice Input / Speech UX", level: 82 },
         { name: "Telegram Bots / Telegraf", level: 88 },
         { name: "Nodemailer / SMTP", level: 84 },
         { name: "Yandex / Google Maps", level: 85 },
