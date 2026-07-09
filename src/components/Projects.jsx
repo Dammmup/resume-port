@@ -319,8 +319,89 @@ function ProjectsComponent() {
           { type: "demo", href: "https://gardenparkinn.vercel.app" },
         ],
       },
+      {
+        title: "DailyReport ERP",
+        desc: language === "ru"
+          ? "Mini-ERP для стажеров и тимлидов: посещаемость, daily-отчеты, планы, комментарии, артефакты, аудит, email verification, Telegram-бот и AI-анализ продуктивности. Проект ценен тем, что закрывает не просто форму отчета, а весь рабочий цикл тимлида: контроль, обратная связь, риски и сводки."
+          : "Mini-ERP for interns and team leads: attendance, daily reports, plans, comments, artifacts, audit logs, email verification, Telegram bot, and AI productivity analysis. The value is not just report collection, but the whole lead workflow: control, feedback, risks, and summaries.",
+        tags: ["React", "TypeScript", "Express 5", "MongoDB", "Telegram Bot", "AI", "Email Verification"],
+        stack: {
+          frontend: ["React 19", "Vite 7", "TypeScript", "Leaflet", "lucide-react"],
+          backend: ["Node.js", "Express 5", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod"],
+          integrations: ["Telegraf", "Nodemailer", "Groq AI", "Vercel Blob", "Audit logs", "Attendance tracking"],
+        },
+        highlights: language === "ru"
+          ? [
+              "AI оценивает daily-отчеты по ясности результата, плану, блокерам и инициативе.",
+              "Telegram-бот позволяет отправлять отчеты и получать summary без входа в веб-интерфейс.",
+              "Есть email verification, audit logs и throttling для более безопасного onboarding.",
+              "Модель посещаемости и локаций превращает проект в управленческий инструмент, а не просто CRUD."
+            ]
+          : [
+              "AI scores daily reports by result clarity, plan clarity, blockers, and initiative.",
+              "Telegram bot lets users submit reports and receive summaries outside the web UI.",
+              "Email verification, audit logs, and throttling make onboarding safer.",
+              "Attendance and location models turn it into an operational management tool, not just CRUD."
+            ],
+        previews: [],
+        links: [],
+      },
+      {
+        title: "Designer Partner Program",
+        desc: language === "ru"
+          ? "Партнерская mini-ERP для дизайнеров интерьеров: дизайнеры, менеджеры, проекты, заявки, заказы, бонусы, лояльность, промокоды, каталог товаров и интеграция с Bitrix24. Уникальность проекта в том, что он связывает CRM, каталог, бонусную экономику и рабочий кабинет дизайнера в одну операционную систему."
+          : "Partner mini-ERP for interior designers: designers, managers, projects, requests, orders, bonuses, loyalty, promocodes, product catalog, and Bitrix24 integration. Its uniqueness is connecting CRM, catalog, bonus economy, and designer workspace into one operating system.",
+        tags: ["NestJS", "React", "MongoDB", "Bitrix24", "BullMQ", "Redis", "Sentry", "DigitalOcean"],
+        stack: {
+          frontend: ["React 18", "Vite", "TypeScript", "React Router", "NProgress"],
+          backend: ["NestJS", "TypeScript", "MongoDB", "Mongoose", "JWT", "Passport", "Swagger"],
+          integrations: ["Bitrix24 CRM", "BullMQ", "Redis", "Sentry", "Telegram", "Nodemailer", "DigitalOcean"],
+        },
+        highlights: language === "ru"
+          ? [
+              "Bitrix24 используется как источник сделок и товаров, а данные маппятся в собственную доменную модель.",
+              "Система рассчитывает бонусы, уровни лояльности и историю начислений для дизайнеров.",
+              "Каталог и заявки связаны с реальными проектами, товарами, КП и рабочими процессами менеджеров.",
+              "Есть production-oriented инфраструктура: health, Sentry, Redis/BullMQ, Telegram и деплой на droplet."
+            ]
+          : [
+              "Bitrix24 acts as the source for deals and products, mapped into a custom domain model.",
+              "The system calculates bonuses, loyalty levels, and transaction history for designers.",
+              "Catalog and requests are tied to real projects, products, proposals, and manager workflows.",
+              "Production-oriented setup with health checks, Sentry, Redis/BullMQ, Telegram, and droplet deployment."
+            ],
+        previews: [],
+        links: [],
+      },
+      {
+        title: "Buhu4et",
+        desc: language === "ru"
+          ? "Full-stack сервис для бухгалтерских/операционных услуг: лиды, заказы, каталог сервисов, калькуляторы, подписки, документы, загрузка файлов, роли и Telegram-настройки. Проект ценен тем, что объединяет лендинг, личный кабинет и внутреннюю админку вокруг понятной воронки: заявка -> расчет -> заказ -> документы."
+          : "Full-stack service for accounting and operational workflows: leads, orders, service catalog, calculators, subscriptions, documents, file uploads, roles, and Telegram settings. Its value is unifying landing, client cabinet, and internal admin around a clear funnel: lead -> calculation -> order -> documents.",
+        tags: ["React", "MUI", "Express", "MongoDB", "Multer", "JWT", "Telegram"],
+        stack: {
+          frontend: ["React 19", "Vite", "TypeScript", "MUI", "React Router", "Axios"],
+          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod", "Multer"],
+          integrations: ["Telegram service", "File uploads", "Subscription plans", "Domain calculators"],
+        },
+        highlights: language === "ru"
+          ? [
+              "Есть сервисный каталог и калькуляторы, которые помогают превращать интерес клиента в расчет.",
+              "Лиды, заказы и документы связаны в одну операционную цепочку.",
+              "Подписки и access-control позволяют развивать продукт как SaaS, а не разовую админку.",
+              "Multer/file uploads и Telegram-настройки закрывают практические рабочие сценарии."
+            ]
+          : [
+              "Service catalog and calculators help turn client interest into a concrete estimate.",
+              "Leads, orders, and documents are connected into one operating chain.",
+              "Subscriptions and access-control make it SaaS-ready rather than a one-off admin panel.",
+              "Multer/file uploads and Telegram settings cover practical day-to-day workflows."
+            ],
+        previews: [],
+        links: [],
+      },
     ],
-    [t]
+    [t, language]
   );
 
   const otherProjects = useMemo(

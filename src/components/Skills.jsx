@@ -33,6 +33,7 @@ const ICON_MAP = {
   "ant design": "antdesign",
   "node.js": "nodedotjs",
   "express": "express",
+  "nestjs": "nestjs",
   "mongodb": "mongodb",
   "firebase": "firebase",
   "digital ocean": "digitalocean",
@@ -67,6 +68,8 @@ const ICON_MAP = {
   "gemini": "googlegemini",
   "cron": "speedtest",
   "automation": "speedtest",
+  "bullmq": "bullmq",
+  "telegram": "telegram",
 };
 
 const getIconUrl = (name) => {
@@ -74,6 +77,9 @@ const getIconUrl = (name) => {
 
   // Manual high-priority overrides for things not in standard icon sets or needing specific logos
   if (n.includes('1c')) return "https://www.google.com/s2/favicons?domain=1c.ru&sz=128";
+  if (n.includes('bitrix')) return "https://www.google.com/s2/favicons?domain=bitrix24.com&sz=128";
+  if (n.includes('nodemailer')) return "https://www.google.com/s2/favicons?domain=nodemailer.com&sz=128";
+  if (n.includes('telegraf')) return "https://www.google.com/s2/favicons?domain=telegraf.js.org&sz=128";
   if (n.includes('typegoose')) return "https://avatars.githubusercontent.com/u/4155121?s=200&v=4";
   
   // Using Google Favicon API as a very reliable fallback for external services
@@ -180,10 +186,12 @@ const SkillsComponent = memo(function Skills() {
       title: t.categories.backend,
       tags: [
         { name: "Node.js (Express)", level: 92 },
+        { name: "NestJS", level: 85 },
         { name: "MongoDB (Mongoose)", level: 90 },
         { name: "TypeScript", level: 92 },
         { name: "JWT / OAuth / RBAC", level: 92 },
         { name: `node-cron / ${language === 'ru' ? 'Автоматизация' : 'Automation'}`, level: 85 },
+        { name: "Zod / Validation", level: 85 },
         { name: "Typegoose", level: 90 },
       ],
     },
@@ -194,6 +202,7 @@ const SkillsComponent = memo(function Skills() {
         { name: "Digital Ocean / CPU", level: 92 },
         { name: "Git / GitHub / GitLab", level: 95 },
         { name: "Sentry / Monitoring", level: 80 },
+        { name: "Bitrix24 / CRM API", level: 85 },
         { name: "Vercel / Firebase", level: 90 },
         { name: "Postman / API Design", level: 92 },
         { name: "Docker", level: 65 },
@@ -206,6 +215,7 @@ const SkillsComponent = memo(function Skills() {
         { name: "MongoDB (Mongoose)", level: 90 },
         { name: "Redis", level: 85 },
         { name: "Supabase", level: 85 },
+        { name: "BullMQ / Queues", level: 80 },
       ],
     },
     {
@@ -215,7 +225,10 @@ const SkillsComponent = memo(function Skills() {
         { name: "Jira / Atlassian", level: 88 },
         { name: "Docx / PDF Gen", level: 80 },
         { name: "1C-Integration / ERP", level: 85 },
+        { name: "Bitrix Integration", level: 85 },
         { name: "AI (Groq / Gemini API)", level: 88 },
+        { name: "Telegram Bots / Telegraf", level: 88 },
+        { name: "Nodemailer / SMTP", level: 84 },
         { name: "Yandex / Google Maps", level: 85 },
         { name: "Flutter (Dart)", level: 88 },
       ],

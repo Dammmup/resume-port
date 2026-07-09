@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Damir Biyankho - Full-Stack Engineer CV</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #172033;
+      background: #f4f6f8;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 10.5px;
+      line-height: 1.35;
+    }
+
+    a {
+      color: #1456a0;
+      text-decoration: none;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: #ffffff;
+      display: grid;
+      grid-template-columns: 68mm 1fr;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.14);
+      break-after: page;
+      page-break-after: always;
+    }
+
+    .page:last-of-type {
+      break-after: auto;
+      page-break-after: auto;
+    }
+
+    .sidebar {
+      background: #102033;
+      color: #f8fafc;
+      padding: 16mm 8mm 12mm;
+    }
+
+    .main {
+      padding: 16mm 12mm 12mm 10mm;
+    }
+
+    .name {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.05;
+      letter-spacing: 0;
+      font-weight: 800;
+    }
+
+    .role {
+      margin: 7px 0 13px;
+      color: #c8d7e8;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .pitch {
+      margin: 0 0 18px;
+      color: #d7e2ef;
+      font-size: 10.7px;
+    }
+
+    .contact {
+      display: grid;
+      gap: 7px;
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+      color: #eaf2fb;
+    }
+
+    .contact li {
+      overflow-wrap: anywhere;
+    }
+
+    .contact span {
+      display: block;
+      color: #91a9c3;
+      font-size: 8.5px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .contact a {
+      color: #ffffff;
+    }
+
+    .side-section {
+      margin-top: 17px;
+    }
+
+    .side-title {
+      margin: 0 0 8px;
+      color: #8fd3ff;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skill-list li {
+      padding: 3px 6px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 5px;
+      background: rgba(255,255,255,0.07);
+      color: #f5f9ff;
+      font-size: 9.4px;
+    }
+
+    .edu-item {
+      margin-bottom: 10px;
+    }
+
+    .edu-item strong {
+      display: block;
+      color: #ffffff;
+      font-size: 10.4px;
+    }
+
+    .edu-item span {
+      color: #b9cade;
+      font-size: 9.3px;
+    }
+
+    .headline {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e5ecf3;
+    }
+
+    .headline h2 {
+      margin: 0 0 6px;
+      color: #0f1f33;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .headline p {
+      margin: 0;
+      color: #4f6074;
+      font-size: 11px;
+    }
+
+    .section {
+      margin-top: 13px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      color: #0f1f33;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 0;
+      border-bottom: 1px solid #dce5ef;
+      padding-bottom: 4px;
+    }
+
+    .project,
+    .experience {
+      margin-bottom: 10px;
+      break-inside: avoid;
+    }
+
+    .project-head,
+    .experience-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+
+    .project h3,
+    .experience h3 {
+      margin: 0;
+      color: #17375f;
+      font-size: 12.5px;
+    }
+
+    .project .meta,
+    .experience .meta {
+      color: #66788e;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .stack {
+      margin: 0 0 3px;
+      color: #42566d;
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    ul.bullets {
+      margin: 0;
+      padding-left: 14px;
+    }
+
+    ul.bullets li {
+      margin: 2px 0;
+      color: #27364a;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    .chip {
+      border: 1px solid #d7e1ec;
+      border-radius: 5px;
+      padding: 2px 5px;
+      color: #38516c;
+      background: #f8fbfe;
+      font-size: 8.8px;
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: 8px;
+      color: #64758a;
+      font-size: 9px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .info-card {
+      border: 1px solid #dce5ef;
+      border-radius: 7px;
+      padding: 7px;
+      background: #f8fbfe;
+      break-inside: avoid;
+    }
+
+    .info-card strong {
+      display: block;
+      color: #17375f;
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: #42566d;
+      font-size: 9.5px;
+    }
+
+    .page-label {
+      margin-top: auto;
+      padding-top: 16px;
+      color: #91a9c3;
+      font-size: 8.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .side-note {
+      color: #d7e2ef;
+      font-size: 9.6px;
+      margin: 0 0 9px;
+    }
+
+    .project-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+    }
+
+    .project-links li {
+      overflow-wrap: anywhere;
+    }
+
+    .project-links strong {
+      display: block;
+      color: #ffffff;
+      font-size: 9.8px;
+    }
+
+    .project-links a,
+    .project-links span {
+      color: #b9cade;
+      font-size: 9px;
+    }
+
+    .project.large {
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e7eef6;
+    }
+
+    .project.large:last-child {
+      border-bottom: 0;
+    }
+
+    .project-summary {
+      margin: 0 0 5px;
+      color: #42566d;
+      font-size: 10px;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        box-shadow: none;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <aside class="sidebar">
+      <h1 class="name">Damir<br />Biyankho</h1>
+      <div class="role">Full-Stack Engineer</div>
+      <p class="pitch">
+        I build business automation platforms: ERP dashboards, mobile attendance systems, AI assistants,
+        integrations, notifications, document generation, and production-ready admin workflows.
+      </p>
+
+      <ul class="contact">
+        <li><span>Location</span>Almaty, Kazakhstan</li>
+        <li><span>Citizenship / Work Permit</span>Kazakhstan</li>
+        <li><span>Email</span><a href="mailto:damir.-@mail.ru">damir.-@mail.ru</a></li>
+        <li><span>Phone</span><a href="tel:+77089358975">+7 708 935 89 75</a></li>
+        <li><span>Phone</span><a href="tel:+77478313398">+7 747 831 33 98</a></li>
+        <li><span>Telegram</span><a href="https://t.me/damir_d">@damir_d</a></li>
+        <li><span>GitHub</span><a href="https://github.com/Dammmup">github.com/Dammmup</a></li>
+        <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/damir-biyankho-558287294/">linkedin.com/in/damir-biyankho</a></li>
+        <li><span>Portfolio</span><a href="https://aldamiram.vercel.app/">aldamiram.vercel.app</a></li>
+      </ul>
+
+      <section class="side-section">
+        <h2 class="side-title">Target Role</h2>
+        <div class="edu-item">
+          <strong>Web Developer</strong>
+          <span>Frontend / Backend JavaScript, TypeScript, React</span>
+        </div>
+        <div class="edu-item">
+          <strong>Desired Salary</strong>
+          <span>350 000 KZT net</span>
+        </div>
+        <div class="edu-item">
+          <strong>Work Format</strong>
+          <span>Full-time or part-time, employer location, Almaty/Kazakhstan</span>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Core Stack</h2>
+        <ul class="skill-list">
+          <li>React</li>
+          <li>TypeScript</li>
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>MongoDB</li>
+          <li>Mongoose</li>
+          <li>Redux</li>
+          <li>Flutter</li>
+          <li>Firebase</li>
+          <li>Supabase</li>
+          <li>Redis</li>
+          <li>Vercel</li>
+          <li>DigitalOcean</li>
+          <li>Docker</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Specialties</h2>
+        <ul class="skill-list">
+          <li>ERP systems</li>
+          <li>SaaS</li>
+          <li>AI automation</li>
+          <li>RBAC</li>
+          <li>JWT/OAuth</li>
+          <li>1C integration</li>
+          <li>Geofencing</li>
+          <li>Maps SDK</li>
+          <li>Telegram bots</li>
+          <li>Push notifications</li>
+          <li>DOCX/PDF</li>
+          <li>Sentry</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Education</h2>
+        <div class="edu-item">
+          <strong>Cyber Security and Networks</strong>
+          <span>IT Academy STEP, 2025 - Present</span>
+        </div>
+        <div class="edu-item">
+          <strong>JavaScript Developer</strong>
+          <span>IT Academy STEP, 2022 - 2023</span>
+        </div>
+        <div class="edu-item">
+          <strong>Information Systems</strong>
+          <span>Eurasian Technological University, 2022 - 2023</span>
+        </div>
+        <div class="edu-item">
+          <strong>Food Production Technology</strong>
+          <span>Technological and Economic College, 2018 - 2021</span>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Languages</h2>
+        <div class="edu-item">
+          <strong>Russian</strong>
+          <span>Native</span>
+        </div>
+        <div class="edu-item">
+          <strong>English</strong>
+          <span>B2 - Upper Intermediate</span>
+        </div>
+        <div class="edu-item">
+          <strong>Kazakh</strong>
+          <span>A2 - Elementary</span>
+        </div>
+      </section>
+
+      <div class="page-label">Page 1 / 2 - Profile and experience</div>
+    </aside>
+
+    <section class="main">
+      <div class="headline">
+        <h2>Full-stack developer focused on ERP, SaaS and AI-powered automation</h2>
+        <p>
+          Strong in turning operational business needs into complete systems: admin panels, secure APIs,
+          mobile workflows, data sync, background jobs, external integrations and deployment. Comfortable
+          owning both product-facing UI and backend architecture.
+        </p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title">Work Experience</h2>
+
+        <article class="experience">
+          <div class="experience-head">
+            <h3>AutoData - Web Developer</h3>
+            <span class="meta">Dec 2023 - Mar 2024</span>
+          </div>
+          <p class="stack">Company: salescout.me/ru/ | Stack: JavaScript, TypeScript, React, MongoDB, caching, UI components</p>
+          <ul class="bullets">
+            <li>Developed new product structures and reworked existing frontend/backend flows in a commercial web product.</li>
+            <li>Migrated data from MongoDB and wrote scripts for selecting and moving specific database records.</li>
+            <li>Cached data and optimized pages to improve site speed and reduce repeated loading.</li>
+            <li>Built user-facing interface logic and reusable components to make the product more convenient for daily use.</li>
+            <li>Worked in a team environment with Jira, Bitbucket and Confluence.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Technical Profile</h2>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <strong>Frontend</strong>
+            <p>React, TypeScript, Vite, Next.js, Ant Design, MUI, Redux, Zustand, Tailwind CSS, Framer Motion.</p>
+          </div>
+          <div class="info-card">
+            <strong>Backend</strong>
+            <p>Node.js, Express, MongoDB, Mongoose, Typegoose, REST APIs, JWT/OAuth, RBAC, node-cron.</p>
+          </div>
+          <div class="info-card">
+            <strong>Automation</strong>
+            <p>Telegram bots, document generation, database scripts, caching, background jobs, Google Drive sync.</p>
+          </div>
+          <div class="info-card">
+            <strong>Product Delivery</strong>
+            <p>Admin dashboards, ERP modules, SaaS workflows, mobile attendance flows, maps and notifications.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Professional Development</h2>
+        <ul class="bullets">
+          <li>JavaScript full course, IT Academy STEP, 2024.</li>
+          <li>Front-End development on JavaScript, Computer Academy STEP, 2024.</li>
+          <li>Diploma Front-End, 2024.</li>
+          <li>Currently studying Cyber Security and Networks to strengthen secure architecture, infrastructure and network fundamentals.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Additional Experience</h2>
+        <ul class="bullets">
+          <li>Can build client and admin interfaces with Ant Design, including forms, tables, dashboards and protected flows.</li>
+          <li>Can create Telegram bots that parse listings and automate notifications for services such as OLX, Roof and Kolesa.</li>
+          <li>Comfortable with PC hardware, low-current systems basics, proxies and engineering-oriented troubleshooting.</li>
+          <li>Driver's license category B.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">How I Work</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <strong>Business-first thinking</strong>
+            <p>I try to understand the real workflow before building screens: who uses the system, what data changes, and what must be automated.</p>
+          </div>
+          <div class="info-card">
+            <strong>Full-cycle ownership</strong>
+            <p>I can move between UI, API, database, integrations, background jobs and deployment without losing the product context.</p>
+          </div>
+          <div class="info-card">
+            <strong>Practical optimization</strong>
+            <p>Experience with caching, page optimization, database record scripts and reducing repeated data loading in real web products.</p>
+          </div>
+          <div class="info-card">
+            <strong>Team collaboration</strong>
+            <p>Worked with Jira, Bitbucket and Confluence; comfortable discussing tasks, reviewing code and adapting to existing project structure.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Tools I Use In Real Projects</h2>
+        <ul class="bullets">
+          <li>Frontend: React, TypeScript, Vite, Next.js, Ant Design, MUI, Redux, Zustand, Tailwind CSS.</li>
+          <li>Backend: Node.js, Express, MongoDB, Mongoose, Typegoose, REST API, JWT, OAuth, RBAC.</li>
+          <li>Operations: Git, GitHub, GitLab, Bitbucket, Jira, Confluence, Postman, Vercel, DigitalOcean, Sentry.</li>
+          <li>Integrations: Telegram Bot API, Firebase, Google Cloud Translation API, maps SDKs, 1C, DOCX/PDF generation.</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+  <main class="page">
+    <aside class="sidebar">
+      <h1 class="name">Project<br />Portfolio</h1>
+      <div class="role">Selected Work</div>
+      <p class="side-note">
+        These projects show the work I can discuss in detail: architecture, frontend, backend, integrations,
+        automation, deployment and product decisions.
+      </p>
+
+      <section class="side-section">
+        <h2 class="side-title">Live Demos</h2>
+        <ul class="project-links">
+          <li><strong>Detsad ERP</strong><a href="https://aldamiram.vercel.app/">aldamiram.vercel.app</a></li>
+          <li><strong>Uyghur Learn</strong><a href="https://ur-front.vercel.app/">ur-front.vercel.app</a></li>
+          <li><strong>Garden Park Inn</strong><a href="https://gardenparkinn.vercel.app/">gardenparkinn.vercel.app</a></li>
+          <li><strong>SearchX</strong><a href="https://search-content.vercel.app/">search-content.vercel.app</a></li>
+          <li><strong>Universe</strong><a href="https://universe-flame-one.vercel.app/">universe-flame-one.vercel.app</a></li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Repositories</h2>
+        <ul class="project-links">
+          <li><strong>Detsad Frontend</strong><a href="https://github.com/Dammmup/detsad_f">github.com/Dammmup/detsad_f</a></li>
+          <li><strong>Detsad Backend</strong><a href="https://github.com/Dammmup/detsad_b">github.com/Dammmup/detsad_b</a></li>
+          <li><strong>Detsad Mobile</strong><a href="https://github.com/Dammmup/detsad_m">github.com/Dammmup/detsad_m</a></li>
+          <li><strong>Uyghur Learn</strong><span>ur-front / ur-ba</span></li>
+          <li><strong>Garden Park Inn</strong><span>GFrontend / GBackend</span></li>
+          <li><strong>Search Content</strong><a href="https://github.com/Dammmup/Search_Content">github.com/Dammmup/Search_Content</a></li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Engineering Focus</h2>
+        <ul class="skill-list">
+          <li>Business automation</li>
+          <li>Admin dashboards</li>
+          <li>Data synchronization</li>
+          <li>AI assistants</li>
+          <li>Mobile field workflows</li>
+          <li>Localization</li>
+          <li>Security basics</li>
+          <li>Monitoring</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Production Status</h2>
+        <div class="edu-item">
+          <strong>Detsad ERP</strong>
+          <span>Actively used by real users for daily kindergarten management workflows.</span>
+        </div>
+      </section>
+
+      <div class="page-label">Page 2 / 2 - Projects and impact</div>
+    </aside>
+
+    <section class="main">
+      <div class="headline">
+        <h2>Selected engineering projects with real product workflows</h2>
+        <p>
+          A deeper view of the systems behind my portfolio: enterprise dashboards, mobile attendance,
+          SaaS learning flows, localization automation, search integrations and interactive UI work.
+        </p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title">Selected Engineering Work</h2>
+
+        <article class="project large">
+          <div class="project-head">
+            <h3>Detsad ERP - Management Platform</h3>
+            <span class="meta">Active production ERP</span>
+          </div>
+          <p class="project-summary">Enterprise-style platform for kindergarten operations: finance, nutrition, medicine, attendance, notifications and daily administration. The system is currently actively used by real users in day-to-day workflows.</p>
+          <p class="stack">Stack: React, TypeScript, Vite, MUI, Redux, Node.js, Express, MongoDB, Firebase, node-cron, 1C, Groq, Gemini</p>
+          <ul class="bullets">
+            <li>Designed modules for operational work instead of isolated demo screens: dashboards, forms, reports, protected routes and admin flows.</li>
+            <li>Maintained the platform around active usage needs, improving real workflows instead of building only static portfolio features.</li>
+            <li>Implemented 1C Accounting integration for financial reconciliation and data synchronization.</li>
+            <li>Integrated AI modules with Groq Llama-3 and Gemini API for project-aware analysis and assistant workflows.</li>
+            <li>Automated DOCX/PDF generation, recurring financial jobs, Telegram notifications and Firebase push messages.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Demo: aldamiram.vercel.app</span>
+            <span class="chip">Repos: detsad_f, detsad_b</span>
+          </div>
+        </article>
+
+        <article class="project large">
+          <div class="project-head">
+            <h3>Detsad Mobile - Field Staff Attendance App</h3>
+            <span class="meta">Flutter + GPS</span>
+          </div>
+          <p class="project-summary">Mobile field workflow for staff attendance with location validation and map-based interaction.</p>
+          <p class="stack">Stack: Flutter, Dart, Firebase, GPS, Geofencing, Yandex Maps SDK, Push Notifications</p>
+          <ul class="bullets">
+            <li>Developed attendance tracking with GPS monitoring and geofencing-based validation.</li>
+            <li>Integrated maps and location-aware UX for field staff and administrative scenarios.</li>
+            <li>Designed offline-first behavior for reliable attendance marking when network quality is unstable.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Repo: detsad_m</span>
+          </div>
+        </article>
+
+        <article class="project large">
+          <div class="project-head">
+            <h3>Uyghur Learn - SaaS / LMS Platform</h3>
+            <span class="meta">SaaS + RBAC</span>
+          </div>
+          <p class="project-summary">Multi-repository learning platform with course, lesson, community and protected account workflows.</p>
+          <p class="stack">Stack: React, TypeScript, Ant Design, i18n, Node.js, Express, MongoDB, Nodemailer, JWT, RBAC</p>
+          <ul class="bullets">
+            <li>Built learning management flows for courses, lessons and community features.</li>
+            <li>Implemented secure email verification with Nodemailer and role-based access control for different user groups.</li>
+            <li>Added protected user flows, content management and rate-limiting oriented security.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Demo: ur-front.vercel.app</span>
+            <span class="chip">Repos: ur-front, ur-ba</span>
+          </div>
+        </article>
+
+        <article class="project large">
+          <div class="project-head">
+            <h3>Garden Park Inn - Hospitality Management Platform</h3>
+            <span class="meta">Localization + Admin</span>
+          </div>
+          <p class="project-summary">Restaurant/hospitality platform with multilingual menu workflows, admin management and financial helpers.</p>
+          <p class="stack">Stack: React, TypeScript, Ant Design, Tailwind CSS, Node.js, Express, MongoDB, Google Cloud Translation API</p>
+          <ul class="bullets">
+            <li>Created an admin dashboard for menu, content and price management.</li>
+            <li>Automated menu localization into 9 languages through Google Cloud Translation API.</li>
+            <li>Integrated external currency rates and dietary categorization: halal, vegetarian and allergen-aware labels.</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Demo: gardenparkinn.vercel.app</span>
+            <span class="chip">Repos: GFrontend, GBackend</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Additional Projects</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <strong>SearchX</strong>
+            <p>Search-oriented product aggregating external API data with favorites and Supabase-backed user features.</p>
+          </div>
+          <div class="info-card">
+            <strong>Universe</strong>
+            <p>Interactive 3D experience with Three.js, React Three Fiber, GSAP, Zustand and state-driven visual flows.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">What I Can Bring To A Team</h2>
+        <ul class="bullets">
+          <li>End-to-end delivery: from business problem and data model to UI, API, integrations, deployment and maintenance.</li>
+          <li>Automation mindset: background jobs, document generation, bots, notifications, AI assistants and data sync.</li>
+          <li>Product sensitivity: dashboards and workflows designed for real daily operations, not only technical demos.</li>
+          <li>Security basics: JWT/OAuth flows, RBAC, rate limiting, monitoring and current cybersecurity studies.</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
