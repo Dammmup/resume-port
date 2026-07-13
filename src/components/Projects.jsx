@@ -10,6 +10,9 @@ const garden = ['/garr.png', '/garr1.png', '/garr2.png']
 const mobile = ['/mob.png', '/mob1.png', '/mob2.png']
 const universe = ['/uni.png', '/uni1.png', '/uni2.png']
 const search = ['/search.png', '/search1.png']
+const dailyReport = ['/dailyreport1.png', '/dailyreport2.png', '/dailyreport3.png']
+const buhu4et = ['/buhu4et1.png', '/buhu4et2.png', '/buhu4et3.png']
+const des = ['/des1.png', '/des2.png', '/des3.png']
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -265,8 +268,7 @@ function ProjectsComponent() {
         highlights: t.projects.detsadERP.highlights,
         previews: aldamiram,
         links: [
-          { type: "code", href: "https://github.com/Dammmup/detsad_f" },
-          { type: "code", href: "https://github.com/Dammmup/detsad_b" },
+
           { type: "demo", href: "https://aldamiram.vercel.app/" }
         ],
       },
@@ -280,10 +282,7 @@ function ProjectsComponent() {
           integrations: ["Geofencing API", "Background GPS Tracking", "Push Notifications", "Firebase Auth"],
         },
         highlights: t.projects.detsadMobile.highlights,
-        previews: mobile,
-        links: [
-          { type: "code", href: "https://github.com/Dammmup/detsad_m" },
-        ],
+        previews: mobile
       },
       {
         title: t.projects.uyghurConnect.title,
@@ -297,8 +296,7 @@ function ProjectsComponent() {
         highlights: t.projects.uyghurConnect.highlights,
         previews: yughur,
         links: [
-          { type: "code", href: "https://github.com/Dammmup/ur-front" },
-          { type: "code", href: "https://github.com/Dammmup/ur-ba" },
+
           { type: "demo", href: "https://ur-front.vercel.app/" },
         ],
       },
@@ -314,8 +312,6 @@ function ProjectsComponent() {
         highlights: t.projects.gardenParkInn.highlights,
         previews: garden,
         links: [
-          { type: "code", href: "https://github.com/Dammmup/GFrontend" },
-          { type: "code", href: "https://github.com/Dammmup/GBackend" },
           { type: "demo", href: "https://gardenparkinn.vercel.app" },
         ],
       },
@@ -332,18 +328,18 @@ function ProjectsComponent() {
         },
         highlights: language === "ru"
           ? [
-              "AI оценивает daily-отчеты по ясности результата, плану, блокерам и инициативе.",
-              "Telegram-бот позволяет отправлять отчеты и получать summary без входа в веб-интерфейс.",
-              "Есть email verification, audit logs и throttling для более безопасного onboarding.",
-              "Модель посещаемости и локаций превращает проект в управленческий инструмент, а не просто CRUD."
-            ]
+            "AI оценивает daily-отчеты по ясности результата, плану, блокерам и инициативе.",
+            "Telegram-бот позволяет отправлять отчеты и получать summary без входа в веб-интерфейс.",
+            "Есть email verification, audit logs и throttling для более безопасного onboarding.",
+            "Модель посещаемости и локаций превращает проект в управленческий инструмент, а не просто CRUD."
+          ]
           : [
-              "AI scores daily reports by result clarity, plan clarity, blockers, and initiative.",
-              "Telegram bot lets users submit reports and receive summaries outside the web UI.",
-              "Email verification, audit logs, and throttling make onboarding safer.",
-              "Attendance and location models turn it into an operational management tool, not just CRUD."
-            ],
-        previews: [],
+            "AI scores daily reports by result clarity, plan clarity, blockers, and initiative.",
+            "Telegram bot lets users submit reports and receive summaries outside the web UI.",
+            "Email verification, audit logs, and throttling make onboarding safer.",
+            "Attendance and location models turn it into an operational management tool, not just CRUD."
+          ],
+        previews: dailyReport,
         links: [],
       },
       {
@@ -359,18 +355,18 @@ function ProjectsComponent() {
         },
         highlights: language === "ru"
           ? [
-              "Bitrix24 используется как источник сделок и товаров, а данные маппятся в собственную доменную модель.",
-              "Система рассчитывает бонусы, уровни лояльности и историю начислений для дизайнеров.",
-              "AI-примерочная принимает до 12-14 фотографий товаров из каталога и генерирует примерное видение готовой комнаты из чернового варианта.",
-              "Голосовая диктовка помогает заполнять проекты быстрее, включая поддержку казахского языка."
-            ]
+            "Bitrix24 используется как источник сделок и товаров, а данные маппятся в собственную доменную модель.",
+            "Система рассчитывает бонусы, уровни лояльности и историю начислений для дизайнеров.",
+            "AI-примерочная принимает до 12-14 фотографий товаров из каталога и генерирует примерное видение готовой комнаты из чернового варианта.",
+            "Голосовая диктовка помогает заполнять проекты быстрее, включая поддержку казахского языка."
+          ]
           : [
-              "Bitrix24 acts as the source for deals and products, mapped into a custom domain model.",
-              "The system calculates bonuses, loyalty levels, and transaction history for designers.",
-              "AI room try-on accepts up to 12-14 catalog product photos and generates an approximate finished-room vision from a rough draft.",
-              "Voice dictation speeds up project filling, including Kazakh language support."
-            ],
-        previews: [],
+            "Bitrix24 acts as the source for deals and products, mapped into a custom domain model.",
+            "The system calculates bonuses, loyalty levels, and transaction history for designers.",
+            "AI room try-on accepts up to 12-14 catalog product photos and generates an approximate finished-room vision from a rough draft.",
+            "Voice dictation speeds up project filling, including Kazakh language support."
+          ],
+        previews: buhu4et,
         links: [],
       },
       {
@@ -386,26 +382,20 @@ function ProjectsComponent() {
         },
         highlights: language === "ru"
           ? [
-              "Есть сервисный каталог и калькуляторы, которые помогают превращать интерес клиента в расчет.",
-              "Лиды, заказы и документы связаны в одну операционную цепочку.",
-              "Подписки и access-control позволяют развивать продукт как SaaS, а не разовую админку.",
-              "Multer/file uploads и Telegram-настройки закрывают практические рабочие сценарии."
-            ]
+            "Есть сервисный каталог и калькуляторы, которые помогают превращать интерес клиента в расчет.",
+            "Лиды, заказы и документы связаны в одну операционную цепочку.",
+            "Подписки и access-control позволяют развивать продукт как SaaS, а не разовую админку.",
+            "Multer/file uploads и Telegram-настройки закрывают практические рабочие сценарии."
+          ]
           : [
-              "Service catalog and calculators help turn client interest into a concrete estimate.",
-              "Leads, orders, and documents are connected into one operating chain.",
-              "Subscriptions and access-control make it SaaS-ready rather than a one-off admin panel.",
-              "Multer/file uploads and Telegram settings cover practical day-to-day workflows."
-            ],
-        previews: [],
+            "Service catalog and calculators help turn client interest into a concrete estimate.",
+            "Leads, orders, and documents are connected into one operating chain.",
+            "Subscriptions and access-control make it SaaS-ready rather than a one-off admin panel.",
+            "Multer/file uploads and Telegram settings cover practical day-to-day workflows."
+          ],
+        previews: des,
         links: [],
       },
-    ],
-    [t, language]
-  );
-
-  const otherProjects = useMemo(
-    () => [
       {
         title: language === 'ru' ? "SearchX (Фронтенд + API интеграции)" : "SearchX (Frontend + API Integrations)",
         desc: language === 'ru'
@@ -417,7 +407,6 @@ function ProjectsComponent() {
           : ["Single search interface across multiple independent external APIs.", "Favorites storage and Supabase-based authentication."],
         previews: search,
         links: [
-          { type: "code", href: "https://github.com/Dammmup/Search_Content" },
           { type: "demo", href: "https://search-content.vercel.app/" },
         ],
       },
@@ -432,12 +421,11 @@ function ProjectsComponent() {
           : ["Immersive interactive 3D storytelling with scene transitions."],
         previews: universe,
         links: [
-          { type: "code", href: "https://github.com/Dammmup" },
           { type: "demo", href: "https://universe-flame-one.vercel.app/" },
         ],
       }
     ],
-    [language]
+    [t, language]
   );
 
   return (
@@ -464,16 +452,6 @@ function ProjectsComponent() {
           ))}
         </motion.div>
 
-        <motion.div variants={itemVariants} className="w-full max-w-6xl text-left mb-5">
-          <h3 className="text-2xl font-semibold text-foreground">
-            {language === 'ru' ? 'Другие проекты' : 'Other Projects'}
-          </h3>
-        </motion.div>
-        <motion.div variants={containerVariants} className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {otherProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} onPreviewOpen={openPreview} />
-          ))}
-        </motion.div>
       </motion.div>
 
       <PreviewLightbox lightbox={lightbox} onClose={closePreview} onPrev={goPrev} onNext={goNext} />
