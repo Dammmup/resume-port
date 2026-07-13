@@ -43,6 +43,8 @@ const StackLine = memo(({ label, items }) => (
 StackLine.displayName = "StackLine";
 
 const ProjectCard = memo(({ project, onPreviewOpen }) => {
+  const { language } = useLanguage();
+
   return (
     <motion.div
       variants={itemVariants}
@@ -54,7 +56,7 @@ const ProjectCard = memo(({ project, onPreviewOpen }) => {
         <div className="mb-5 rounded-xl border border-emerald-300/50 dark:border-emerald-800/70 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/40 dark:via-teal-950/30 dark:to-cyan-950/30 p-3">
           <h4 className="text-sm font-semibold text-emerald-800 dark:text-emerald-300 mb-2 inline-flex items-center gap-1.5">
             <BadgeCheck className="w-4 h-4" />
-            {translations[useLanguage().language].projects.whyItMatters}
+            {translations[language].projects.whyItMatters}
           </h4>
           <ul className="space-y-1.5">
             {project.highlights.slice(0, 4).map((point, index) => (
@@ -69,7 +71,7 @@ const ProjectCard = memo(({ project, onPreviewOpen }) => {
       {project.stack ? (
         <div className="mb-5 space-y-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50/80 dark:bg-neutral-900/40 p-3">
           <h4 className="text-sm font-semibold text-foreground/80">
-            {translations[useLanguage().language].projects.techStack}
+            {translations[language].projects.techStack}
           </h4>
           {project.stack.frontend?.length ? <StackLine label="Фронтенд" items={project.stack.frontend} /> : null}
           {project.stack.backend?.length ? <StackLine label="Бэкенд" items={project.stack.backend} /> : null}
@@ -79,7 +81,7 @@ const ProjectCard = memo(({ project, onPreviewOpen }) => {
 
       <div className="mb-5">
         <h4 className="text-sm font-semibold text-foreground/80 mb-2">
-          {translations[useLanguage().language].projects.preview}
+          {translations[language].projects.preview}
         </h4>
         {project.previews?.length ? (
           <div className="grid grid-cols-3 gap-2">
@@ -119,7 +121,7 @@ const ProjectCard = memo(({ project, onPreviewOpen }) => {
       </div>
 
       <div className="flex gap-4 flex-wrap">
-        {project.links.map((link, linkIndex) => (
+        {(project.links ?? []).map((link, linkIndex) => (
           <a
             key={linkIndex}
             href={link.href}
@@ -138,6 +140,8 @@ const ProjectCard = memo(({ project, onPreviewOpen }) => {
 ProjectCard.displayName = "ProjectCard";
 
 const PreviewLightbox = memo(({ lightbox, onClose, onPrev, onNext }) => {
+  const { language } = useLanguage();
+
   if (!lightbox) return null;
 
   return (
@@ -169,7 +173,7 @@ const PreviewLightbox = memo(({ lightbox, onClose, onPrev, onNext }) => {
             className="absolute top-3 right-3 px-3 py-1.5 text-sm rounded-md bg-black/55 text-white hover:bg-black/75 transition"
             aria-label="Закрыть превью"
           >
-            {translations[useLanguage().language].projects.close}
+            {translations[language].projects.close}
           </button>
 
           {lightbox.images.length > 1 ? (
@@ -282,7 +286,8 @@ function ProjectsComponent() {
           integrations: ["Geofencing API", "Background GPS Tracking", "Push Notifications", "Firebase Auth"],
         },
         highlights: t.projects.detsadMobile.highlights,
-        previews: mobile
+        previews: mobile,
+        links: [],
       },
       {
         title: t.projects.uyghurConnect.title,

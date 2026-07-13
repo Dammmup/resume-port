@@ -102,7 +102,7 @@ const CP = memo(() => {
       ai_assistant: <Bot className="w-5 h-5 text-purple-500" />,
     };
 
-    return t.achievements.map((ach) => ({
+    return (t.achievements ?? []).map((ach) => ({
       ...ach,
       icon: icons[ach.id],
     }));
