@@ -51,15 +51,15 @@ export const translations = {
           ]
         },
         detsadERP: {
-          title: "Detsad ERP (Panel)",
+          title: "Detsad ERP / Aldamiram",
           category: "Enterprise System",
-          description: "A high-load enterprise platform for educational institutions, featuring deep automation and third-party integrations.",
+          description: "An operating system for private kindergartens in Kazakhstan: children, staff, payments, food/SanPiN, medicine, pedagogy, and realtime ops — with multi-institution support (Aldamiram & Limpopo), PWA, and AI assistant.",
           highlights: [
-            "Full integration with 1C Accounting for financial reconciliation and data sync",
-            "AI-powered data analysis module using Groq (Llama-3) and Gemini API",
-            "Multi-channel notification system (Telegram Bot & Firebase Push)",
-            "Automated document generation (DOCX/PDF) for contracts and reports",
-            "Background processing of financial cycles using node-cron jobs"
+            "Child billing with group payment rules, partial Kaspi/cash payments, debt/overpayment carry-over, and attendance-based recalculation",
+            "Pedagogy suite: cyclograms, perspective plans, observation monitoring with Excel export, and development maps",
+            "AI assistant on Groq with tool-calling (DB queries, in-app navigation) plus dish nutrition enrichment",
+            "Telegram bot + cron for payment/payroll alerts, geofenced staff check-in, and scheduled operational reports",
+            "SanPiN food journals, medical records, DOCX/PDF document generation, and role-based access across institutions"
           ]
         },
         detsadMobile: {
@@ -217,15 +217,15 @@ export const translations = {
           ]
         },
         detsadERP: {
-          title: "Detsad ERP (Панель)",
+          title: "Detsad ERP / Aldamiram",
           category: "Enterprise-система",
-          description: "Высоконагруженная корпоративная платформа для автоматизации образовательных учреждений с глубокой интеграцией сервисов.",
+          description: "Операционная система частного детского сада в Казахстане: дети, персонал, оплаты, питание/СанПиН, медицина, педагогика и realtime-операционка — с multi-institution (Алдамирам и Лимпопо), PWA и AI-ассистентом.",
           highlights: [
-            "Полная интеграция с 1С:Бухгалтерия для сверки сальдо и синхронизации данных",
-            "Модуль ИИ-аналитики на базе Groq (Llama-3) и Gemini API для обработки данных",
-            "Многоканальная система уведомлений (Telegram-бот и Firebase Push)",
-            "Автоматическая генерация документов (DOCX/PDF) для договоров и отчетов",
-            "Фоновая обработка финансовых циклов с помощью задач node-cron"
+            "Биллинг детей: правила оплаты по группам, частичные Kaspi/наличные, перенос долга/переплаты и пересчёт по посещаемости",
+            "Педблок: циклограммы, перспективные планы, мониторинг наблюдений с Excel-экспортом и карта развития",
+            "AI-ассистент на Groq с tool-calling (запросы к БД, навигация по приложению) и обогащение блюд по КБЖУ",
+            "Telegram-бот и cron: уведомления по оплатам/зарплате, геозонный check-in персонала, регламентные отчёты",
+            "СанПиН-журналы питания, медучёт, генерация DOCX/PDF и ролевой доступ по учреждениям"
           ]
         },
         detsadMobile: {

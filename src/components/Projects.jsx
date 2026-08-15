@@ -4,7 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../translations";
 
-const aldamiram = ['/aldamiram screen.png', '/aldamiram screen1.png', '/aldamiram screen2.png']
+const aldamiram = ['/aldamiram1.png', '/aldamiram2.png', '/aldamiram3.png', '/aldamiram4.png']
+const tyanShan = ['/tyan1.png', '/tyan2.png', '/tyan3.png']
+const craft = ['/craft1.png', '/craft2.png', '/craft3.png']
 const yughur = ['/yug.png', '/yug1.png', '/yug2.png']
 const garden = ['/garr.png', '/garr1.png', '/garr2.png']
 const mobile = ['/mob.png', '/mob1.png', '/mob2.png']
@@ -261,19 +263,77 @@ function ProjectsComponent() {
   const fullStackProjects = useMemo(
     () => [
       {
+        title: "Tyan Shan",
+        desc: language === "ru"
+          ? "POS/ERP для ресторана: залы и столы, меню, заказы, кухня (KDS), касса, смены, скидки, отчёты и аудит. Отдельный локальный printer-agent печатает чеки/пречеки по Socket.io (ESC/POS или Windows-принтер). Ценность — полный операционный цикл зала в реальном времени, а не просто CRUD заказов."
+          : "Restaurant POS/ERP: halls and tables, menu, orders, kitchen display (KDS), cashier, shifts, discounts, reports, and audit. A local printer-agent prints receipts/prechecks over Socket.io (ESC/POS or Windows printer). The value is a real-time floor operating loop, not just order CRUD.",
+        tags: ["NestJS", "React", "MongoDB", "Socket.io", "Ant Design", "ESC/POS", "JWT", "Swagger"],
+        stack: {
+          frontend: ["React 19", "Vite", "TypeScript", "Ant Design", "Mantine", "TanStack Query", "Zustand", "i18next", "Socket.io Client"],
+          backend: ["NestJS", "TypeScript", "MongoDB", "Mongoose", "JWT", "Passport", "Swagger", "Socket.io"],
+          integrations: ["Printer agent (ESC/POS / Windows)", "Realtime kitchen & floor events", "Roles: owner / waiter / cashier / kitchen", "Audit & reports"],
+        },
+        highlights: language === "ru"
+          ? [
+            "Realtime-события связывают официанта, кухню и кассу без ручного обновления экранов.",
+            "Printer-agent вынесен отдельно: печать идёт локально, backend только ставит print jobs.",
+            "Роли и PIN/JWT-доступ закрывают сценарии зала: заказ → кухня → оплата → чек.",
+            "Модули смен, скидок, прайсинга и аудита делают MVP готовым к реальной смене."
+          ]
+          : [
+            "Realtime events keep waiter, kitchen, and cashier in sync without manual refresh.",
+            "Printer-agent is separate: printing stays local while the backend only queues print jobs.",
+            "Roles and PIN/JWT access cover the floor loop: order → kitchen → payment → receipt.",
+            "Shifts, discounts, pricing, and audit make the MVP shift-ready."
+          ],
+        previews: tyanShan,
+        links: [
+          { type: "code", href: "https://github.com/Dammmup/tyan_shan_f" },
+        ],
+      },
+      {
+        title: "Craft",
+        desc: language === "ru"
+          ? "Интернет-магазин стройматериалов с публичным каталогом и админкой: товары, продажи, аналитика, Excel-экспорт и настройки. Фото товаров хранятся в Vercel Blob, в MongoDB только URL. Проект закрывает связку витрина → карточка товара → операционный кабинет продавца."
+          : "Building materials storefront with a public catalog and admin cabinet: products, sales, analytics, Excel export, and settings. Product photos live in Vercel Blob; MongoDB keeps only URLs. It connects storefront → product page → seller operations.",
+        tags: ["React", "Express", "MongoDB", "JWT", "Vercel Blob", "ExcelJS", "Multer", "TypeScript"],
+        stack: {
+          frontend: ["React 18", "Vite", "TypeScript", "React Router"],
+          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "JWT", "Multer"],
+          integrations: ["Vercel Blob (product images)", "Excel export (ExcelJS)", "Admin analytics & sales"],
+        },
+        highlights: language === "ru"
+          ? [
+            "Публичный каталог и защищённая админка разделены: витрина для клиентов, кабинет для операций.",
+            "Изображения вынесены в Vercel Blob — база не раздувается бинарниками.",
+            "Есть продажи, аналитика и Excel-экспорт для учёта ассортимента и оборота.",
+            "Backend и frontend разнесены в отдельные репозитории и готовы к деплою на Vercel."
+          ]
+          : [
+            "Public catalog and protected admin are separated: storefront for buyers, cabinet for operations.",
+            "Images go to Vercel Blob so the database does not store binaries.",
+            "Sales, analytics, and Excel export cover assortment and turnover tracking.",
+            "Backend and frontend are split into separate repos and ready for Vercel deploy."
+          ],
+        previews: craft,
+        links: [
+          { type: "code", href: "https://github.com/Dammmup/craft_f" },
+        ],
+      },
+      {
         title: t.projects.detsadERP.title,
         desc: t.projects.detsadERP.description,
-        tags: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "1C", "Telegram Bot", "Cron"],
+        tags: ["React", "TypeScript", "Express", "MongoDB", "PWA", "Telegram Bot", "Groq AI", "Cron"],
         stack: {
-          frontend: ["React", "Vite", "TypeScript", "MUI", "Redux", "Recharts", "Yandex Maps"],
-          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "1C-Integration"],
-          integrations: ["Groq (Llama-3)", "Gemini AI", "Telegram Bot API", "Sentry", "DOCX Generator"],
+          frontend: ["React 18", "Vite", "TypeScript", "MUI", "Recharts", "Yandex Maps", "PWA / Web Push", "Framer Motion"],
+          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod", "node-cron"],
+          integrations: ["Groq AI (tools)", "Telegram Bot", "Firebase / Web Push", "Yandex Maps geofencing", "ExcelJS / DOCX / PDF", "Multi-institution (Aldamiram + Limpopo)"],
         },
         highlights: t.projects.detsadERP.highlights,
         previews: aldamiram,
         links: [
-
-          { type: "demo", href: "https://aldamiram.vercel.app/" }
+          { type: "demo", href: "https://aldamiram.vercel.app/" },
+          { type: "code", href: "https://github.com/Dammmup/detsad_f" },
         ],
       },
       {
