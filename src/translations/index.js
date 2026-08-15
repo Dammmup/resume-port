@@ -39,6 +39,11 @@ export const translations = {
       whyItMatters: "Why It Matters",
       highlights: "Technical Highlights",
       comingSoon: "Coming Soon",
+      timeline: "Development period",
+      present: "present",
+      monthsShort: "mo.",
+      weeksShort: "wk.",
+      daysShort: "d.",
       projects: {
         gardenParkInn: {
           title: "Garden Park Inn",
@@ -205,6 +210,11 @@ export const translations = {
       whyItMatters: "Почему это важно",
       highlights: "Технические особенности",
       comingSoon: "Скоро",
+      timeline: "Срок разработки",
+      present: "н.в.",
+      monthsShort: "мес.",
+      weeksShort: "нед.",
+      daysShort: "дн.",
       projects: {
         gardenParkInn: {
           title: "Garden Park Inn",

@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { BadgeCheck, Code, ExternalLink, FolderKanban } from "lucide-react";
+import { BadgeCheck, Clock, Code, ExternalLink, FolderKanban } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../translations";
@@ -15,6 +15,51 @@ const search = ['/search.png', '/search1.png']
 const dailyReport = ['/dailyreport1.png', '/dailyreport2.png', '/dailyreport3.png']
 const buhu4et = ['/buhu4et1.png', '/buhu4et2.png', '/buhu4et3.png']
 const des = ['/des1.png', '/des2.png', '/des3.png']
+
+const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS_RU = ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+
+function parseISODate(value) {
+  if (!value) return null;
+  const [year, month, day] = value.split("-").map(Number);
+  if (!year || !month || !day) return null;
+  return new Date(year, month - 1, day);
+}
+
+function formatMonthYear(date, language) {
+  const months = language === "ru" ? MONTHS_RU : MONTHS_EN;
+  return `${months[date.getMonth()]} ${date.getFullYear()}`;
+}
+
+function formatDurationLabel(start, end, language) {
+  const ms = end - start;
+  const days = Math.max(1, Math.round(ms / (1000 * 60 * 60 * 24)));
+  const t = translations[language].projects;
+
+  if (days < 14) {
+    return language === "ru" ? `${days} ${t.daysShort}` : `${days} ${t.daysShort}`;
+  }
+  if (days < 60) {
+    const weeks = Math.max(1, Math.round(days / 7));
+    return language === "ru" ? `~${weeks} ${t.weeksShort}` : `~${weeks} ${t.weeksShort}`;
+  }
+  const months = Math.max(1, Math.round(days / 30.44));
+  return language === "ru" ? `~${months} ${t.monthsShort}` : `~${months} ${t.monthsShort}`;
+}
+
+/** Timeline from first project commit (start) to last commit or ongoing (end: null). */
+function formatProjectTimeline(timeline, language) {
+  if (!timeline?.start) return null;
+  const start = parseISODate(timeline.start);
+  if (!start) return null;
+  const end = timeline.end ? parseISODate(timeline.end) : new Date();
+  if (!end) return null;
+
+  const t = translations[language].projects;
+  const startLabel = formatMonthYear(start, language);
+  const endLabel = timeline.end ? formatMonthYear(end, language) : t.present;
+  return `${startLabel} — ${endLabel} · ${formatDurationLabel(start, end, language)}`;
+}
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -46,13 +91,22 @@ StackLine.displayName = "StackLine";
 
 const ProjectCard = memo(({ project, onPreviewOpen }) => {
   const { language } = useLanguage();
+  const timelineLabel = formatProjectTimeline(project.timeline, language);
 
   return (
     <motion.div
       variants={itemVariants}
       className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6 flex flex-col h-full"
     >
-      <h3 className="text-xl font-bold text-foreground mb-3 leading-tight">{project.title}</h3>
+      <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">{project.title}</h3>
+      {timelineLabel ? (
+        <div className="mb-3 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+          <Clock className="w-3.5 h-3.5 shrink-0" />
+          <span>
+            {translations[language].projects.timeline}: {timelineLabel}
+          </span>
+        </div>
+      ) : null}
       <p className="text-base text-muted-foreground mb-4 flex-grow">{project.desc}</p>
       {project.highlights?.length ? (
         <div className="mb-5 rounded-xl border border-emerald-300/50 dark:border-emerald-800/70 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/40 dark:via-teal-950/30 dark:to-cyan-950/30 p-3">
@@ -263,10 +317,56 @@ function ProjectsComponent() {
   const fullStackProjects = useMemo(
     () => [
       {
+        title: t.projects.detsadERP.title,
+        desc: t.projects.detsadERP.description,
+        timeline: { start: "2025-09-06", end: null },
+        tags: ["React", "TypeScript", "Express", "MongoDB", "PWA", "Telegram Bot", "Groq AI", "Cron"],
+        stack: {
+          frontend: ["React 18", "Vite", "TypeScript", "MUI", "Recharts", "Yandex Maps", "PWA / Web Push", "Framer Motion"],
+          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod", "node-cron"],
+          integrations: ["Groq AI (tools)", "Telegram Bot", "Firebase / Web Push", "Yandex Maps geofencing", "ExcelJS / DOCX / PDF", "Multi-institution (Aldamiram + Limpopo)"],
+        },
+        highlights: t.projects.detsadERP.highlights,
+        previews: aldamiram,
+        links: [
+          { type: "demo", href: "https://aldamiram.vercel.app/" },
+          { type: "code", href: "https://github.com/Dammmup/detsad_f" },
+        ],
+      },
+      {
+        title: "Designer Partner Program",
+        desc: language === "ru"
+          ? "Партнерская mini-ERP для дизайнеров интерьеров: дизайнеры, менеджеры, проекты, заявки, заказы, бонусы, лояльность, промокоды, каталог товаров и интеграция с Bitrix24. Внутри есть AI-примерочная комнаты по товарам из каталога, голосовая диктовка для заполнения проектов и калькулятор краски. Уникальность проекта в том, что он связывает CRM, каталог, бонусную экономику и рабочий кабинет дизайнера в одну операционную систему."
+          : "Partner mini-ERP for interior designers: designers, managers, projects, requests, orders, bonuses, loyalty, promocodes, product catalog, and Bitrix24 integration. It includes an AI room try-on based on catalog products, voice dictation for project filling, and a paint calculator. Its uniqueness is connecting CRM, catalog, bonus economy, and designer workspace into one operating system.",
+        timeline: { start: "2026-06-10", end: "2026-07-04" },
+        tags: ["NestJS", "React", "MongoDB", "Bitrix24", "BullMQ", "Redis", "Sentry", "DigitalOcean"],
+        stack: {
+          frontend: ["React 18", "Vite", "TypeScript", "React Router", "NProgress"],
+          backend: ["NestJS", "TypeScript", "MongoDB", "Mongoose", "JWT", "Passport", "Swagger"],
+          integrations: ["Bitrix24 CRM", "AI room try-on", "Voice dictation", "Paint calculator", "BullMQ", "Redis", "Sentry", "Telegram", "DigitalOcean"],
+        },
+        highlights: language === "ru"
+          ? [
+            "Bitrix24 используется как источник сделок и товаров, а данные маппятся в собственную доменную модель.",
+            "Система рассчитывает бонусы, уровни лояльности и историю начислений для дизайнеров.",
+            "AI-примерочная принимает до 12-14 фотографий товаров из каталога и генерирует примерное видение готовой комнаты из чернового варианта.",
+            "Голосовая диктовка помогает заполнять проекты быстрее, включая поддержку казахского языка."
+          ]
+          : [
+            "Bitrix24 acts as the source for deals and products, mapped into a custom domain model.",
+            "The system calculates bonuses, loyalty levels, and transaction history for designers.",
+            "AI room try-on accepts up to 12-14 catalog product photos and generates an approximate finished-room vision from a rough draft.",
+            "Voice dictation speeds up project filling, including Kazakh language support."
+          ],
+        previews: buhu4et,
+        links: [],
+      },
+      {
         title: "Tyan Shan",
         desc: language === "ru"
           ? "POS/ERP для ресторана: залы и столы, меню, заказы, кухня (KDS), касса, смены, скидки, отчёты и аудит. Отдельный локальный printer-agent печатает чеки/пречеки по Socket.io (ESC/POS или Windows-принтер). Ценность — полный операционный цикл зала в реальном времени, а не просто CRUD заказов."
           : "Restaurant POS/ERP: halls and tables, menu, orders, kitchen display (KDS), cashier, shifts, discounts, reports, and audit. A local printer-agent prints receipts/prechecks over Socket.io (ESC/POS or Windows printer). The value is a real-time floor operating loop, not just order CRUD.",
+        timeline: { start: "2026-08-10", end: null },
         tags: ["NestJS", "React", "MongoDB", "Socket.io", "Ant Design", "ESC/POS", "JWT", "Swagger"],
         stack: {
           frontend: ["React 19", "Vite", "TypeScript", "Ant Design", "Mantine", "TanStack Query", "Zustand", "i18next", "Socket.io Client"],
@@ -292,10 +392,113 @@ function ProjectsComponent() {
         ],
       },
       {
+        title: t.projects.uyghurConnect.title,
+        desc: t.projects.uyghurConnect.description,
+        timeline: { start: "2025-06-01", end: "2026-04-21" },
+        tags: ["SaaS", "TypeScript", "Node.js", "MongoDB", "Email Auth", "RBAC", "LMS"],
+        stack: {
+          frontend: ["React", "Vite", "TypeScript", "Ant Design", "i18next", "Rate Limiting"],
+          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "Nodemailer"],
+          integrations: ["Secure Email Verification", "Role-based access", "Content management workflow"],
+        },
+        highlights: t.projects.uyghurConnect.highlights,
+        previews: yughur,
+        links: [
+          { type: "demo", href: "https://ur-front.vercel.app/" },
+        ],
+      },
+      {
+        title: "DailyReport ERP",
+        desc: language === "ru"
+          ? "Mini-ERP для стажеров и тимлидов: посещаемость, daily-отчеты, планы, комментарии, артефакты, аудит, email verification, Telegram-бот и AI-анализ продуктивности. Проект ценен тем, что закрывает не просто форму отчета, а весь рабочий цикл тимлида: контроль, обратная связь, риски и сводки."
+          : "Mini-ERP for interns and team leads: attendance, daily reports, plans, comments, artifacts, audit logs, email verification, Telegram bot, and AI productivity analysis. The value is not just report collection, but the whole lead workflow: control, feedback, risks, and summaries.",
+        timeline: { start: "2026-05-30", end: "2026-06-11" },
+        tags: ["React", "TypeScript", "Express 5", "MongoDB", "Telegram Bot", "AI", "Email Verification"],
+        stack: {
+          frontend: ["React 19", "Vite 7", "TypeScript", "Leaflet", "lucide-react"],
+          backend: ["Node.js", "Express 5", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod"],
+          integrations: ["Telegraf", "Nodemailer", "Groq AI", "Vercel Blob", "Audit logs", "Attendance tracking"],
+        },
+        highlights: language === "ru"
+          ? [
+            "AI оценивает daily-отчеты по ясности результата, плану, блокерам и инициативе.",
+            "Telegram-бот позволяет отправлять отчеты и получать summary без входа в веб-интерфейс.",
+            "Есть email verification, audit logs и throttling для более безопасного onboarding.",
+            "Модель посещаемости и локаций превращает проект в управленческий инструмент, а не просто CRUD."
+          ]
+          : [
+            "AI scores daily reports by result clarity, plan clarity, blockers, and initiative.",
+            "Telegram bot lets users submit reports and receive summaries outside the web UI.",
+            "Email verification, audit logs, and throttling make onboarding safer.",
+            "Attendance and location models turn it into an operational management tool, not just CRUD."
+          ],
+        previews: dailyReport,
+        links: [],
+      },
+      {
+        title: "Buhu4et",
+        desc: language === "ru"
+          ? "Full-stack сервис для бухгалтерских/операционных услуг: лиды, заказы, каталог сервисов, калькуляторы, подписки, документы, загрузка файлов, роли и Telegram-настройки. Проект ценен тем, что объединяет лендинг, личный кабинет и внутреннюю админку вокруг понятной воронки: заявка -> расчет -> заказ -> документы."
+          : "Full-stack service for accounting and operational workflows: leads, orders, service catalog, calculators, subscriptions, documents, file uploads, roles, and Telegram settings. Its value is unifying landing, client cabinet, and internal admin around a clear funnel: lead -> calculation -> order -> documents.",
+        timeline: { start: "2026-04-27", end: "2026-08-02" },
+        tags: ["React", "MUI", "Express", "MongoDB", "Multer", "JWT", "Telegram"],
+        stack: {
+          frontend: ["React 19", "Vite", "TypeScript", "MUI", "React Router", "Axios"],
+          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod", "Multer"],
+          integrations: ["Telegram service", "File uploads", "Subscription plans", "Domain calculators"],
+        },
+        highlights: language === "ru"
+          ? [
+            "Есть сервисный каталог и калькуляторы, которые помогают превращать интерес клиента в расчет.",
+            "Лиды, заказы и документы связаны в одну операционную цепочку.",
+            "Подписки и access-control позволяют развивать продукт как SaaS, а не разовую админку.",
+            "Multer/file uploads и Telegram-настройки закрывают практические рабочие сценарии."
+          ]
+          : [
+            "Service catalog and calculators help turn client interest into a concrete estimate.",
+            "Leads, orders, and documents are connected into one operating chain.",
+            "Subscriptions and access-control make it SaaS-ready rather than a one-off admin panel.",
+            "Multer/file uploads and Telegram settings cover practical day-to-day workflows."
+          ],
+        previews: des,
+        links: [],
+      },
+      {
+        title: t.projects.gardenParkInn.title,
+        desc: t.projects.gardenParkInn.description,
+        timeline: { start: "2025-04-18", end: "2026-04-21" },
+        tags: ["React", "Ant Design", "Google Translate API", "Currency Exchange", "Dashboard"],
+        stack: {
+          frontend: ["React", "Vite", "TypeScript", "Ant Design", "Tailwind CSS"],
+          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose"],
+          integrations: ["9-language auto-translation", "Currency conversion (floatrates API)", "Admin Content Management"],
+        },
+        highlights: t.projects.gardenParkInn.highlights,
+        previews: garden,
+        links: [
+          { type: "demo", href: "https://gardenparkinn.vercel.app" },
+        ],
+      },
+      {
+        title: t.projects.detsadMobile.title,
+        desc: t.projects.detsadMobile.description,
+        timeline: { start: "2025-11-03", end: "2026-06-12" },
+        tags: ["Flutter", "Dart", "Geofencing", "GPS", "Mobile", "Firebase", "Android/iOS"],
+        stack: {
+          frontend: ["Flutter", "Dart", "Yandex Maps SDK"],
+          backend: ["Firebase Admin SDK", "Node.js (API Proxy)"],
+          integrations: ["Geofencing API", "Background GPS Tracking", "Push Notifications", "Firebase Auth"],
+        },
+        highlights: t.projects.detsadMobile.highlights,
+        previews: mobile,
+        links: [],
+      },
+      {
         title: "Craft",
         desc: language === "ru"
           ? "Интернет-магазин стройматериалов с публичным каталогом и админкой: товары, продажи, аналитика, Excel-экспорт и настройки. Фото товаров хранятся в Vercel Blob, в MongoDB только URL. Проект закрывает связку витрина → карточка товара → операционный кабинет продавца."
           : "Building materials storefront with a public catalog and admin cabinet: products, sales, analytics, Excel export, and settings. Product photos live in Vercel Blob; MongoDB keeps only URLs. It connects storefront → product page → seller operations.",
+        timeline: { start: "2026-08-06", end: "2026-08-07" },
         tags: ["React", "Express", "MongoDB", "JWT", "Vercel Blob", "ExcelJS", "Multer", "TypeScript"],
         stack: {
           frontend: ["React 18", "Vite", "TypeScript", "React Router"],
@@ -321,151 +524,11 @@ function ProjectsComponent() {
         ],
       },
       {
-        title: t.projects.detsadERP.title,
-        desc: t.projects.detsadERP.description,
-        tags: ["React", "TypeScript", "Express", "MongoDB", "PWA", "Telegram Bot", "Groq AI", "Cron"],
-        stack: {
-          frontend: ["React 18", "Vite", "TypeScript", "MUI", "Recharts", "Yandex Maps", "PWA / Web Push", "Framer Motion"],
-          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod", "node-cron"],
-          integrations: ["Groq AI (tools)", "Telegram Bot", "Firebase / Web Push", "Yandex Maps geofencing", "ExcelJS / DOCX / PDF", "Multi-institution (Aldamiram + Limpopo)"],
-        },
-        highlights: t.projects.detsadERP.highlights,
-        previews: aldamiram,
-        links: [
-          { type: "demo", href: "https://aldamiram.vercel.app/" },
-          { type: "code", href: "https://github.com/Dammmup/detsad_f" },
-        ],
-      },
-      {
-        title: t.projects.detsadMobile.title,
-        desc: t.projects.detsadMobile.description,
-        tags: ["Flutter", "Dart", "Geofencing", "GPS", "Mobile", "Firebase", "Android/iOS"],
-        stack: {
-          frontend: ["Flutter", "Dart", "Yandex Maps SDK"],
-          backend: ["Firebase Admin SDK", "Node.js (API Proxy)"],
-          integrations: ["Geofencing API", "Background GPS Tracking", "Push Notifications", "Firebase Auth"],
-        },
-        highlights: t.projects.detsadMobile.highlights,
-        previews: mobile,
-        links: [],
-      },
-      {
-        title: t.projects.uyghurConnect.title,
-        desc: t.projects.uyghurConnect.description,
-        tags: ["SaaS", "TypeScript", "Node.js", "MongoDB", "Email Auth", "RBAC", "LMS"],
-        stack: {
-          frontend: ["React", "Vite", "TypeScript", "Ant Design", "i18next", "Rate Limiting"],
-          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "Nodemailer"],
-          integrations: ["Secure Email Verification", "Role-based access", "Content management workflow"],
-        },
-        highlights: t.projects.uyghurConnect.highlights,
-        previews: yughur,
-        links: [
-
-          { type: "demo", href: "https://ur-front.vercel.app/" },
-        ],
-      },
-      {
-        title: t.projects.gardenParkInn.title,
-        desc: t.projects.gardenParkInn.description,
-        tags: ["React", "Ant Design", "Google Translate API", "Currency Exchange", "Dashboard"],
-        stack: {
-          frontend: ["React", "Vite", "TypeScript", "Ant Design", "Tailwind CSS"],
-          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose"],
-          integrations: ["9-language auto-translation", "Currency conversion (floatrates API)", "Admin Content Management"],
-        },
-        highlights: t.projects.gardenParkInn.highlights,
-        previews: garden,
-        links: [
-          { type: "demo", href: "https://gardenparkinn.vercel.app" },
-        ],
-      },
-      {
-        title: "DailyReport ERP",
-        desc: language === "ru"
-          ? "Mini-ERP для стажеров и тимлидов: посещаемость, daily-отчеты, планы, комментарии, артефакты, аудит, email verification, Telegram-бот и AI-анализ продуктивности. Проект ценен тем, что закрывает не просто форму отчета, а весь рабочий цикл тимлида: контроль, обратная связь, риски и сводки."
-          : "Mini-ERP for interns and team leads: attendance, daily reports, plans, comments, artifacts, audit logs, email verification, Telegram bot, and AI productivity analysis. The value is not just report collection, but the whole lead workflow: control, feedback, risks, and summaries.",
-        tags: ["React", "TypeScript", "Express 5", "MongoDB", "Telegram Bot", "AI", "Email Verification"],
-        stack: {
-          frontend: ["React 19", "Vite 7", "TypeScript", "Leaflet", "lucide-react"],
-          backend: ["Node.js", "Express 5", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod"],
-          integrations: ["Telegraf", "Nodemailer", "Groq AI", "Vercel Blob", "Audit logs", "Attendance tracking"],
-        },
-        highlights: language === "ru"
-          ? [
-            "AI оценивает daily-отчеты по ясности результата, плану, блокерам и инициативе.",
-            "Telegram-бот позволяет отправлять отчеты и получать summary без входа в веб-интерфейс.",
-            "Есть email verification, audit logs и throttling для более безопасного onboarding.",
-            "Модель посещаемости и локаций превращает проект в управленческий инструмент, а не просто CRUD."
-          ]
-          : [
-            "AI scores daily reports by result clarity, plan clarity, blockers, and initiative.",
-            "Telegram bot lets users submit reports and receive summaries outside the web UI.",
-            "Email verification, audit logs, and throttling make onboarding safer.",
-            "Attendance and location models turn it into an operational management tool, not just CRUD."
-          ],
-        previews: dailyReport,
-        links: [],
-      },
-      {
-        title: "Designer Partner Program",
-        desc: language === "ru"
-          ? "Партнерская mini-ERP для дизайнеров интерьеров: дизайнеры, менеджеры, проекты, заявки, заказы, бонусы, лояльность, промокоды, каталог товаров и интеграция с Bitrix24. Внутри есть AI-примерочная комнаты по товарам из каталога, голосовая диктовка для заполнения проектов и калькулятор краски. Уникальность проекта в том, что он связывает CRM, каталог, бонусную экономику и рабочий кабинет дизайнера в одну операционную систему."
-          : "Partner mini-ERP for interior designers: designers, managers, projects, requests, orders, bonuses, loyalty, promocodes, product catalog, and Bitrix24 integration. It includes an AI room try-on based on catalog products, voice dictation for project filling, and a paint calculator. Its uniqueness is connecting CRM, catalog, bonus economy, and designer workspace into one operating system.",
-        tags: ["NestJS", "React", "MongoDB", "Bitrix24", "BullMQ", "Redis", "Sentry", "DigitalOcean"],
-        stack: {
-          frontend: ["React 18", "Vite", "TypeScript", "React Router", "NProgress"],
-          backend: ["NestJS", "TypeScript", "MongoDB", "Mongoose", "JWT", "Passport", "Swagger"],
-          integrations: ["Bitrix24 CRM", "AI room try-on", "Voice dictation", "Paint calculator", "BullMQ", "Redis", "Sentry", "Telegram", "DigitalOcean"],
-        },
-        highlights: language === "ru"
-          ? [
-            "Bitrix24 используется как источник сделок и товаров, а данные маппятся в собственную доменную модель.",
-            "Система рассчитывает бонусы, уровни лояльности и историю начислений для дизайнеров.",
-            "AI-примерочная принимает до 12-14 фотографий товаров из каталога и генерирует примерное видение готовой комнаты из чернового варианта.",
-            "Голосовая диктовка помогает заполнять проекты быстрее, включая поддержку казахского языка."
-          ]
-          : [
-            "Bitrix24 acts as the source for deals and products, mapped into a custom domain model.",
-            "The system calculates bonuses, loyalty levels, and transaction history for designers.",
-            "AI room try-on accepts up to 12-14 catalog product photos and generates an approximate finished-room vision from a rough draft.",
-            "Voice dictation speeds up project filling, including Kazakh language support."
-          ],
-        previews: buhu4et,
-        links: [],
-      },
-      {
-        title: "Buhu4et",
-        desc: language === "ru"
-          ? "Full-stack сервис для бухгалтерских/операционных услуг: лиды, заказы, каталог сервисов, калькуляторы, подписки, документы, загрузка файлов, роли и Telegram-настройки. Проект ценен тем, что объединяет лендинг, личный кабинет и внутреннюю админку вокруг понятной воронки: заявка -> расчет -> заказ -> документы."
-          : "Full-stack service for accounting and operational workflows: leads, orders, service catalog, calculators, subscriptions, documents, file uploads, roles, and Telegram settings. Its value is unifying landing, client cabinet, and internal admin around a clear funnel: lead -> calculation -> order -> documents.",
-        tags: ["React", "MUI", "Express", "MongoDB", "Multer", "JWT", "Telegram"],
-        stack: {
-          frontend: ["React 19", "Vite", "TypeScript", "MUI", "React Router", "Axios"],
-          backend: ["Node.js", "Express", "TypeScript", "MongoDB", "Mongoose", "JWT", "Zod", "Multer"],
-          integrations: ["Telegram service", "File uploads", "Subscription plans", "Domain calculators"],
-        },
-        highlights: language === "ru"
-          ? [
-            "Есть сервисный каталог и калькуляторы, которые помогают превращать интерес клиента в расчет.",
-            "Лиды, заказы и документы связаны в одну операционную цепочку.",
-            "Подписки и access-control позволяют развивать продукт как SaaS, а не разовую админку.",
-            "Multer/file uploads и Telegram-настройки закрывают практические рабочие сценарии."
-          ]
-          : [
-            "Service catalog and calculators help turn client interest into a concrete estimate.",
-            "Leads, orders, and documents are connected into one operating chain.",
-            "Subscriptions and access-control make it SaaS-ready rather than a one-off admin panel.",
-            "Multer/file uploads and Telegram settings cover practical day-to-day workflows."
-          ],
-        previews: des,
-        links: [],
-      },
-      {
         title: language === 'ru' ? "SearchX (Фронтенд + API интеграции)" : "SearchX (Frontend + API Integrations)",
         desc: language === 'ru'
           ? "Фронтенд-ориентированный продукт, агрегирующий данные из нескольких внешних API с использованием Redux для управления состоянием и Supabase для пользовательских функций."
           : "Frontend-focused product aggregating data from multiple external APIs using Redux for state management and Supabase for user features.",
+        timeline: { start: "2024-09-03", end: "2026-04-21" },
         tags: ["React", "Redux Toolkit", "Supabase", "API Integrations", "Vite"],
         highlights: language === 'ru'
           ? ["Единый интерфейс поиска по нескольким независимым внешним API.", "Сохранение избранного и авторизация на базе Supabase."]
@@ -480,6 +543,7 @@ function ProjectsComponent() {
         desc: language === 'ru'
           ? "Интерактивный 3D-опыт со сценарным повествованием и динамическими визуальными состояниями. Построен на иммерсивных переходах, потоковых анимациях и исследовательском UI."
           : "Interactive 3D experience with scripted narrative and dynamic visual states. Built with immersive transitions, fluid animations, and exploratory UI.",
+        timeline: { start: "2026-02-25", end: "2026-04-22" },
         tags: ["Three.js", "React Three Fiber", "GSAP", "Zustand", "Tailwind CSS"],
         highlights: language === 'ru'
           ? ["Иммерсивное интерактивное 3D-повествование с переходами между сценами."]
@@ -508,8 +572,13 @@ function ProjectsComponent() {
 
         <motion.div variants={itemVariants} className="w-full max-w-6xl text-left mb-5">
           <h3 className="text-2xl font-semibold text-foreground">
-            {language === 'ru' ? 'Full-Stack Проекты' : 'Full-Stack Projects'}
+            {language === 'ru' ? 'Full-Stack проекты (по масштабу)' : 'Full-Stack Projects (by scale)'}
           </h3>
+          <p className="text-sm text-muted-foreground mt-1">
+            {language === 'ru'
+              ? 'Сортировка: охват продукта, глубина стека/интеграций и срок активной разработки.'
+              : 'Sorted by product scope, stack/integration depth, and active development time.'}
+          </p>
         </motion.div>
         <motion.div variants={containerVariants} className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {fullStackProjects.map((project, index) => (
