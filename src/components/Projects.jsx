@@ -358,7 +358,7 @@ function ProjectsComponent() {
             "AI room try-on accepts up to 12-14 catalog product photos and generates an approximate finished-room vision from a rough draft.",
             "Voice dictation speeds up project filling, including Kazakh language support."
           ],
-        previews: buhu4et,
+        previews: des,
         links: [],
       },
       {
@@ -460,7 +460,7 @@ function ProjectsComponent() {
             "Subscriptions and access-control make it SaaS-ready rather than a one-off admin panel.",
             "Multer/file uploads and Telegram settings cover practical day-to-day workflows."
           ],
-        previews: des,
+        previews: buhu4et,
         links: [],
       },
       {
