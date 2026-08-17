@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { ExternalLink, Swords, Trophy, Zap, Cloud, MapPin, Bot } from "lucide-react";
+import { Bot, Building2, ExternalLink, MapPin, Plug, Receipt, Swords, Trophy, UtensilsCrossed } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../translations";
@@ -39,10 +39,10 @@ const RepoCard = memo(({ repo, language }) => (
     <div className="text-sm text-muted-foreground mb-3">
       <span className="text-foreground/80 font-semibold">{language === 'ru' ? 'Стек' : 'Stack'}:</span> {repo.stack}
     </div>
-    <a 
-      href={repo.url} 
-      target="_blank" 
-      rel="noopener noreferrer" 
+    <a
+      href={repo.url}
+      target="_blank"
+      rel="noopener noreferrer"
       className="mt-auto pt-2 flex items-center gap-1 text-primary font-medium text-sm hover:underline hover:text-foreground dark:hover:text-primary-foreground/70 transition-colors"
     >
       <ExternalLink className="w-4 h-4" />
@@ -59,36 +59,36 @@ const CP = memo(() => {
   const featuredRepos = useMemo(
     () => [
       {
-        name: "detsad_b",
-        desc: language === 'ru' 
-          ? "Бэкенд ERP-системы управления детским садом: авторизация, медицина, питание, бухгалтерия, уведомления и автоматические задачи."
-          : "Backend for Kindergarten ERP system: auth, medicine, nutrition, accounting, notifications, and cron jobs.",
-        stack: "TypeScript, Node.js, Express, MongoDB, Firebase, node-cron",
+        name: "detsad_b / detsad_f",
+        desc: language === 'ru'
+          ? "Продакшен ERP детсада: биллинг с правилами групп, СанПиН, медицина, педагогика, Groq AI, Telegram/cron и multi-institution."
+          : "Production kindergarten ERP: group billing rules, SanPiN, medicine, pedagogy, Groq AI, Telegram/cron, and multi-institution access.",
+        stack: "React, TypeScript, Express, MongoDB, Groq, Telegram, PWA",
         url: "https://github.com/Dammmup/detsad_b",
       },
       {
-        name: "detsad_f",
+        name: "tyan_shan_b / tyan_shan_f",
         desc: language === 'ru'
-          ? "Админ-панель фронтенда со сложными дашбордами и модулями для ежедневных операций."
-          : "Frontend admin panel with complex dashboards and modules for daily operations.",
-        stack: "React, TypeScript, Vite, MUI, Redux",
-        url: "https://github.com/Dammmup/detsad_f",
+          ? "Ресторанный POS/ERP: заказы, KDS, касса, смены и локальный printer-agent по Socket.io (ESC/POS / Windows)."
+          : "Restaurant POS/ERP: orders, KDS, cashier, shifts, and a local Socket.io printer-agent (ESC/POS / Windows).",
+        stack: "NestJS, React, MongoDB, Socket.io, Ant Design",
+        url: "https://github.com/Dammmup/tyan_shan_b",
       },
       {
-        name: "ur-front / ur-ba",
+        name: "designers-backend",
         desc: language === 'ru'
-          ? "Архитектура из двух репозиториев для мультиязычной SaaS-платформы с ролевым доступом к образовательным процессам."
-          : "Multi-repository architecture for a multi-language SaaS platform with RBAC for educational processes.",
-        stack: "React, TypeScript, Express, MongoDB, JWT, i18n",
-        url: "https://github.com/Dammmup/ur-front",
+          ? "Партнёрская ERP для дизайнеров: Bitrix24, бонусы/лояльность, AI-примерочная, очереди BullMQ и S3."
+          : "Partner ERP for designers: Bitrix24, bonuses/loyalty, AI room try-on, BullMQ queues, and S3.",
+        stack: "NestJS, MongoDB, Bitrix24, BullMQ, Redis, Groq",
+        url: "https://github.com/Dammmup/designers-backend",
       },
       {
-        name: "Search_Content",
+        name: "detsad_m",
         desc: language === 'ru'
-          ? "Продукт-агрегатор с интеграцией нескольких API, избранным и авторизацией."
-          : "Aggregator product with multiple API integrations, favorites, and authentication.",
-        stack: "React, Redux Toolkit, Supabase, Express",
-        url: "https://github.com/Dammmup/Search_Content",
+          ? "Flutter-приложение полевого персонала: геофенсинг, GPS check-in и push-уведомления."
+          : "Flutter field-staff app: geofencing, GPS check-in, and push notifications.",
+        stack: "Flutter, Dart, Firebase, Yandex Maps, Geofencing",
+        url: "https://github.com/Dammmup/detsad_m",
       },
     ],
     [language]
@@ -96,10 +96,12 @@ const CP = memo(() => {
 
   const ACHIEVEMENTS = useMemo(() => {
     const icons = {
-      caching: <Zap className="w-5 h-5 text-yellow-500" />,
-      google_drive: <Cloud className="w-5 h-5 text-blue-500" />,
+      production_erp: <Building2 className="w-5 h-5 text-emerald-500" />,
+      billing_engine: <Receipt className="w-5 h-5 text-amber-500" />,
+      realtime_pos: <UtensilsCrossed className="w-5 h-5 text-orange-500" />,
+      ai_assistant: <Bot className="w-5 h-5 text-violet-500" />,
       geofencing: <MapPin className="w-5 h-5 text-green-500" />,
-      ai_assistant: <Bot className="w-5 h-5 text-purple-500" />,
+      integrations: <Plug className="w-5 h-5 text-sky-500" />,
     };
 
     return (t.achievements ?? []).map((ach) => ({
@@ -121,7 +123,6 @@ const CP = memo(() => {
           </p>
         </motion.div>
 
-        {/* Achievements Section */}
         <motion.div variants={itemVariants} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8">
           {ACHIEVEMENTS.map((ach) => (
             <div key={ach.id} className="bg-white/90 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-700 rounded-2xl shadow p-6 flex gap-4 hover:shadow-lg transition-shadow duration-300">
@@ -139,7 +140,6 @@ const CP = memo(() => {
           ))}
         </motion.div>
 
-        {/* Repos Section */}
         <div className="w-full max-w-5xl space-y-8">
           <motion.h3 variants={itemVariants} className="text-2xl font-bold text-foreground flex items-center gap-2">
             <Swords className="w-6 h-6 text-primary" />

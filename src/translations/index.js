@@ -5,7 +5,7 @@ export const translations = {
       skills: "Skills",
       projects: "Projects",
       academics: "Academics",
-      cp: "CP",
+      cp: "Highlights",
       contact: "Contact"
     },
     about: {
@@ -121,31 +121,43 @@ export const translations = {
     },
     cp: {
       title: "Engineering Highlights",
-      description: "Selected repositories and direct engineering contributions reflecting my current focus.",
+      description: "Production systems and hard engineering work from recent projects: ERP, realtime ops, AI tools, and integrations.",
       achievements: [
         {
-          id: "caching",
-          stat: "Performance",
-          label: "Data Caching",
-          description: "Optimized page load speed via multi-month data caching."
+          id: "production_erp",
+          stat: "Production",
+          label: "Kindergarten OS",
+          description: "Aldamiram / Limpopo ERP is live in daily use: children, staff, SanPiN, medicine, pedagogy, and multi-institution access."
         },
         {
-          id: "google_drive",
-          stat: "Automation",
-          label: "Cloud Sync",
-          description: "Automated data synchronization with Google Drive."
+          id: "billing_engine",
+          stat: "Billing",
+          label: "Group payment rules",
+          description: "Built child billing with group surcharges, custom periods, partial Kaspi/cash payments, and debt/overpayment carry-over."
         },
         {
-          id: "geofencing",
-          stat: "Security",
-          label: "Geofencing",
-          description: "Developed custom geofencing system from the ground up."
+          id: "realtime_pos",
+          stat: "Realtime",
+          label: "Restaurant POS",
+          description: "Designed Tyan Shan floor loop with Socket.io sync across waiter, kitchen, cashier, and a local ESC/POS printer agent."
         },
         {
           id: "ai_assistant",
           stat: "AI Core",
-          label: "Smart Assistant",
-          description: "Integrated a low-latency AI assistant with full CRUD access for project knowledge."
+          label: "Tool-calling assistant",
+          description: "Integrated Groq AI with tool-calling for DB queries, in-app navigation, and dish nutrition enrichment."
+        },
+        {
+          id: "geofencing",
+          stat: "Field ops",
+          label: "Geofencing attendance",
+          description: "Shipped custom geofencing and GPS check-in for staff attendance in the Flutter field app and web panel."
+        },
+        {
+          id: "integrations",
+          stat: "Integrations",
+          label: "CRM & bots",
+          description: "Connected Bitrix24 CRM, Telegram bots, cron jobs, and Vercel Blob into working product workflows."
         }
       ],
       repos: {
@@ -293,31 +305,43 @@ export const translations = {
     },
     cp: {
       title: "Технические достижения",
-      description: "Избранные репозитории и инженерный вклад, отражающие мою текущую практику разработки.",
+      description: "Продакшен-системы и сильный инженерный вклад из свежих проектов: ERP, realtime, AI и интеграции.",
       achievements: [
         {
-          id: "caching",
-          stat: "Оптимизация",
-          label: "Кэширование",
-          description: "Оптимизировал скорость загрузки страницы кэшированием прошлых месяцев."
+          id: "production_erp",
+          stat: "Продакшен",
+          label: "ОС детсада",
+          description: "Aldamiram / Limpopo ERP работает в ежедневной эксплуатации: дети, персонал, СанПиН, медицина, педагогика и multi-institution."
         },
         {
-          id: "google_drive",
-          stat: "Автоматизация",
-          label: "Google Drive",
-          description: "Автоматизировал выгрузку данных в google drive."
+          id: "billing_engine",
+          stat: "Биллинг",
+          label: "Правила оплаты",
+          description: "Собрал биллинг детей с надбавками по группам, своими периодами, частичными Kaspi/наличными и переносом долга/переплаты."
         },
         {
-          id: "geofencing",
-          stat: "Безопасность",
-          label: "Геофенсинг",
-          description: "Реализовал с 0 геофенснинг."
+          id: "realtime_pos",
+          stat: "Realtime",
+          label: "Ресторанный POS",
+          description: "Спроектировал цикл зала Tyan Shan на Socket.io: официант, кухня, касса и локальный ESC/POS printer-agent."
         },
         {
           id: "ai_assistant",
           stat: "AI-ядро",
-          label: "Умный помощник",
-          description: "Интегрировал умного ии-асистента с crud-операциями на платформу который может ответить на любой вопрос связанный с проектом с минимальной задержкой."
+          label: "Ассистент с tools",
+          description: "Интегрировал Groq AI с tool-calling: запросы к БД, навигация по приложению и обогащение блюд по КБЖУ."
+        },
+        {
+          id: "geofencing",
+          stat: "Полевые смены",
+          label: "Геофенсинг",
+          description: "С нуля сделал геозоны и GPS check-in для учёта персонала во Flutter-приложении и веб-панели."
+        },
+        {
+          id: "integrations",
+          stat: "Интеграции",
+          label: "CRM и боты",
+          description: "Связал Bitrix24 CRM, Telegram-ботов, cron-задачи и Vercel Blob в рабочие продуктовые сценарии."
         }
       ],
       repos: {
