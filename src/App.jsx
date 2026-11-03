@@ -14,7 +14,11 @@ import Academics from "./components/Academics";
 import Projects from "./components/Projects";
 import CP from "./components/CP";
 import Contact from "./components/Contact";
-import { LanguageProvider } from "./context/LanguageContext";
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+import { translations } from "./translations";
+
+// Заголовок вкладки по умолчанию — как в index.html.
+const SITE_TITLE = "Damir Biyankho — Full-Stack Engineer · Almaty";
 
 
 // --- NEW AWESOME BACKGROUND ---
@@ -68,6 +72,15 @@ const pageTransition = { type: "tween", ease: "anticipate", duration: 0.5 };
 // Memoize the routes to prevent re-calculation
 const AnimatedRoutes = memo(() => {
     const location = useLocation();
+    const { language } = useLanguage();
+
+    // У каждого раздела свой заголовок вкладки: «Projects — Damir Biyankho».
+    useEffect(() => {
+        const key = location.pathname.replace(/^\//, "");
+        const section = translations[language]?.nav?.[key];
+        document.title = section && key !== "about" ? `${section} — Damir Biyankho` : SITE_TITLE;
+    }, [location.pathname, language]);
+
     const routesConfig = [
         // THE FIX: Render the About component on the root path '/'
         { path: "/", Component: About },

@@ -2,15 +2,72 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=0.75" />
-  <title>Damir Biyankho</title>
+  <title>Damir Biyankho — Full-Stack Engineer · Almaty</title>
+  <meta name="description" content="Full-stack engineer in Almaty, Kazakhstan. I build ERP and SaaS platforms, business automation and AI assistants with React, TypeScript, Node.js and MongoDB." />
+  <meta name="author" content="Damir Biyankho" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- og:url подставляет плагин site-meta (vite.config.js), когда известен адрес сайта -->
+  <!-- site-meta -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Damir Biyankho" />
+  <meta property="og:title" content="Damir Biyankho — Full-Stack Engineer" />
+  <meta property="og:description" content="ERP and SaaS platforms, business automation and AI assistants. React, TypeScript, Node.js, MongoDB. Almaty, Kazakhstan." />
+  <meta property="og:image" content="__SITE_URL__/assets/damir.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Damir Biyankho",
+    "jobTitle": "Full-Stack Engineer",
+    "url": "__SITE_URL__/",
+    "image": "__SITE_URL__/assets/damir.png",
+    "email": "mailto:damir.-@mail.ru",
+    "address": { "@type": "PostalAddress", "addressLocality": "Almaty", "addressCountry": "KZ" },
+    "knowsLanguage": ["ru", "en", "kk"],
+    "knowsAbout": ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Flutter", "ERP systems", "SaaS", "Business automation", "AI assistants", "Telegram bots"],
+    "sameAs": [
+      "https://github.com/Dammmup",
+      "https://www.linkedin.com/in/damir-biyankho-558287294/",
+      "https://t.me/damir_d"
+    ]
+  }
+  </script>
 </head>
 
 <body>
-  <div id="root"></div>
+  <!--
+    Содержимое #root — для тех, кто не исполняет JavaScript: поисковых и AI-ботов
+    и превью ссылок. React при запуске заменяет его приложением (src/main.jsx).
+  -->
+  <div id="root">
+    <main style="max-width:720px;margin:0 auto;padding:48px 20px;font-family:system-ui,sans-serif;line-height:1.6">
+      <h1>Damir Biyankho — Full-Stack Engineer</h1>
+      <p>Almaty, Kazakhstan. I build business automation platforms: ERP dashboards, mobile attendance systems, AI assistants, integrations, notifications and document generation.</p>
+      <p>Stack: React, TypeScript, Vite, Next.js, Node.js, Express, MongoDB, Mongoose, Flutter, Firebase, Supabase, Vercel.</p>
+      <h2>Projects</h2>
+      <ul>
+        <li><a href="https://aldamiram.vercel.app/">Detsad ERP / Aldamiram</a> — operating system for private kindergartens in Kazakhstan: billing, staff, SanPiN food journals, medicine, pedagogy, PWA and a Groq AI assistant. In production.</li>
+        <li><a href="https://github.com/Dammmup/detsad_m">Detsad Mobile</a> — Flutter app for staff attendance with GPS geofencing and offline mode.</li>
+        <li><a href="https://ur-front.vercel.app/">Uyghur Learn</a> — SaaS learning platform with courses, community, email verification and role-based access.</li>
+        <li><a href="https://gardenparkinn.vercel.app">Garden Park Inn</a> — hospitality platform with menu translation into 9 languages and an admin dashboard.</li>
+        <li><a href="https://search-content.vercel.app/">SearchX</a> and <a href="https://universe-flame-one.vercel.app/">Universe</a> — search product on Supabase and an interactive 3D experience.</li>
+      </ul>
+      <h2>Contacts</h2>
+      <p>
+        Email: <a href="mailto:damir.-@mail.ru">damir.-@mail.ru</a> ·
+        Telegram: <a href="https://t.me/damir_d">@damir_d</a> ·
+        <a href="https://github.com/Dammmup">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/damir-biyankho-558287294/">LinkedIn</a> ·
+        <a href="/resume.pdf">CV (PDF)</a>
+      </p>
+    </main>
+  </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

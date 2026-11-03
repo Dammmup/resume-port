@@ -12,6 +12,8 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('language', language);
+    // Язык страницы — для поисковиков, скринридеров и переносов слов.
+    document.documentElement.lang = language;
   }, [language]);
 
   const toggleLanguage = useCallback(() => {

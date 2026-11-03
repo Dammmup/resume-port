@@ -1,101 +1,60 @@
-# Personal Portfolio Website - Shashank Raj
+# Damir Biyankho — Portfolio
 
-A clean, modern, and highly performant personal portfolio website built with **React**, **Vite**, **Tailwind CSS**, and **Framer Motion**. This template is designed to be easily customizable and showcases a professional, animation-rich user interface.
+Personal portfolio of **Damir Biyankho**, full-stack engineer from Almaty, Kazakhstan.
+I build business automation platforms: ERP dashboards, mobile attendance systems,
+AI assistants, integrations, notifications and document generation.
 
-It features a multi-page architecture with dedicated sections for an introduction, skills, education, projects, competitive programming achievements, and a functional contact form.
+The site is available in English and Russian and has sections for an introduction,
+skills, education, projects, engineering highlights and contacts. The CV is in
+`public/resume.pdf`.
 
----
+## Selected projects
 
-## 🚀 Live Demo
+| Project | What it is | Links |
+|---|---|---|
+| Detsad ERP / Aldamiram | Operating system for private kindergartens: billing, staff, SanPiN food journals, medicine, pedagogy, PWA, Groq AI assistant. In production. | [demo](https://aldamiram.vercel.app/) · [frontend](https://github.com/Dammmup/detsad_f) · [backend](https://github.com/Dammmup/detsad_b) |
+| Detsad Mobile | Flutter app for staff attendance with GPS geofencing and offline mode. | [code](https://github.com/Dammmup/detsad_m) |
+| Uyghur Learn | SaaS learning platform with courses, community, email verification and RBAC. | [demo](https://ur-front.vercel.app/) |
+| Garden Park Inn | Hospitality platform with menu translation into 9 languages and an admin dashboard. | [demo](https://gardenparkinn.vercel.app) |
+| SearchX | Search product on external APIs with Supabase-backed favorites. | [demo](https://search-content.vercel.app/) |
+| Universe | Interactive 3D experience with Three.js and React Three Fiber. | [demo](https://universe-flame-one.vercel.app/) |
 
-[**View Portfolio on Vercel**](https://shashank-raj-portfolio.vercel.app)
+## Tech stack
 
----
+React 19, Vite, Tailwind CSS, shadcn/ui, Framer Motion, React Router, Lucide icons,
+Vercel Analytics. Deployed on Vercel.
 
-## ✨ Features
+## Search and AI visibility
 
--   **Modern & Responsive UI:** Clean, minimalist design that looks great on all devices.
--   **Multi-Page Architecture:** Smooth client-side routing between all sections using React Router.
--   **Robust Animations:**
-    -   Seamless page transitions powered by Framer Motion.
-    -   Reliable "staggered entrance" animations for content on each page.
--   **Dark/Light Mode:** A beautiful, persistent theme toggle for user preference.
--   **Component-Based:** Built with reusable components for easy maintenance and customization.
--   **Contact Form Integration:** A functional contact form powered by Formspree.
--   **Performance-Optimized:** Fast load times and a smooth experience thanks to Vite and best practices.
+The site is a single-page app, so crawlers that do not run JavaScript would see an
+empty page. To avoid that:
 
----
+- `index.html` contains a plain-HTML summary inside `#root` (who I am, projects,
+  contacts). React replaces it when the app starts.
+- `index.html` has a meta description, Open Graph tags and Schema.org `Person`
+  markup (JSON-LD).
+- Every section sets its own page title; the page language follows the language switch.
+- The `site-meta` plugin in `vite.config.js` adds `og:url`, `robots.txt` and
+  `sitemap.xml` at build time. The site address comes from
+  `SITE_URL`, or from Vercel's `VERCEL_PROJECT_PRODUCTION_URL` when deployed. In a
+  local build without either, the absolute links are left out.
 
-## 🛠️ Tech Stack
+## Run locally
 
--   **Framework:** [React](https://react.dev/)
--   **Build Tool:** [Vite](https://vitejs.dev/)
--   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
--   **UI Components:** [Shadcn/ui](https://ui.shadcn.com/)
--   **Animation:** [Framer Motion](https://www.framer.com/motion/)
--   **Icons:** [Lucide React](https://lucide.dev/)
--   **Routing:** [React Router](https://reactrouter.com/)
--   **Deployment:** [Vercel](https://vercel.com/)
-
----
-
-## 🚀 Getting Started
-
-To get a local copy up and running, follow these simple steps.
-
-### Prerequisites
-
-Make sure you have Node.js and npm installed on your machine.
-- `npm`
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1.  Clone the repo
-    ```sh
-    git clone https://github.com/shashank2401/react-vite-tailwind-portfolio-template.git
-    ```
-2.  Install NPM packages
-    ```sh
-    npm install
-    ```
-3.  Run the development server
-    ```sh
-    npm run dev
-    ```
-    Your site will be available at `http://localhost:5173/` (or another port if 5173 is in use).
-
----
-
-## 📂 File Structure
-
-The project follows a standard component-based structure to keep the code organized and maintainable.
-
-```
-src/
-├── components/
-│   ├── About.jsx
-│   ├── Academics.jsx
-│   ├── Contact.jsx
-│   ├── CP.jsx
-│   ├── Footer.jsx
-│   ├── Header.jsx
-│   ├── Layout.jsx
-│   ├── Projects.jsx
-│   ├── ScrollToTop.jsx
-│   ├── SideNav.jsx
-│   ├── Skills.jsx
-│   └── ui/              # Shadcn/ui components
-│       ├── button.jsx
-│       └── ...
-├── App.jsx              # Main app component with routing
-└── main.jsx             # Entry point of the application
+```sh
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build in dist/
 ```
 
----
+To build with a fixed address: `SITE_URL=https://example.com npm run build`.
 
-## ✒️ Author
+## Contacts
 
-**Shashank Raj**
+- Email: damir.-@mail.ru
+- Telegram: [@damir_d](https://t.me/damir_d)
+- GitHub: [Dammmup](https://github.com/Dammmup)
+- LinkedIn: [damir-biyankho](https://www.linkedin.com/in/damir-biyankho-558287294/)
+
+The design started from an open-source React + Vite portfolio template and has been
+reworked for my own content.
